@@ -23,6 +23,30 @@ fi
 die()  { echo ""; echo "❌ $*"; exit 1; }
 step() { echo "$*"; }
 ok()   { echo "   ✓ $*"; }
+APT_UPDATED=0
+
+is_pkg_installed() {
+    local pkg="$1"
+    dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"
+}
+
+ensure_apt_pkg() {
+    local pkg="$1"
+    local hint="$2"
+
+    if is_pkg_installed "$pkg"; then
+        ok "${pkg} present"
+        return 0
+    fi
+
+    step "   Installing ${pkg} (${hint})..."
+    if [ "$APT_UPDATED" -eq 0 ]; then
+        $SUDO apt-get update -y >/dev/null
+        APT_UPDATED=1
+    fi
+    $SUDO apt-get install -y --no-install-recommends "$pkg" >/dev/null
+    ok "${pkg} installed"
+}
 
 show_failure_logs() {
     if [ -f "$LOG_FILE" ]; then
@@ -87,8 +111,21 @@ command -v php >/dev/null 2>&1 || die "php not found in PATH"
 
 PHP_VER_MM="$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')"
 
-command -v php-config >/dev/null 2>&1 || die "php-config not found — install: apt install php${PHP_VER_MM}-dev build-essential"
-command -v cc >/dev/null 2>&1 || die "cc not found — install: apt install build-essential"
+if ! command -v php-config >/dev/null 2>&1; then
+    ensure_apt_pkg "php${PHP_VER_MM}-dev" "php-config and headers"
+fi
+if ! command -v cc >/dev/null 2>&1; then
+    ensure_apt_pkg "build-essential" "compiler toolchain"
+fi
+if ! command -v pkg-config >/dev/null 2>&1; then
+    ensure_apt_pkg "pkg-config" "dependency discovery"
+fi
+if ! is_pkg_installed "libftdi1-dev"; then
+    ensure_apt_pkg "libftdi1-dev" "FTDI headers and library"
+fi
+if ! is_pkg_installed "libusb-1.0-0-dev"; then
+    ensure_apt_pkg "libusb-1.0-0-dev" "USB transport headers and library"
+fi
 
 if [ -n "${ZEPHIR_BIN:-}" ]; then
     ZEPHIR="$ZEPHIR_BIN"
@@ -132,11 +169,15 @@ ok "PHP version:   ${PHP_VER_MM}"
 ok "PHP binary:    ${PHP_BIN_REAL}"
 ok "Extension dir: ${PHP_EXT_DIR}"
 
-command -v pkg-config >/dev/null 2>&1 || die "pkg-config not found — install: apt install pkg-config libftdi1-dev"
 if pkg-config --exists libftdi1; then
     ok "Found libftdi1: $(pkg-config libftdi1 --modversion)"
 else
-    die "libftdi1 not found — install: apt install libftdi1-dev"
+    ensure_apt_pkg "libftdi1-dev" "FTDI pkg-config metadata"
+    if pkg-config --exists libftdi1; then
+        ok "Found libftdi1: $(pkg-config libftdi1 --modversion)"
+    else
+        die "libftdi1 still not found after installing dependencies."
+    fi
 fi
 
 # GCC 14 on Trixie promotes some Zephir kernel warnings to errors.

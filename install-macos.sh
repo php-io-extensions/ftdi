@@ -22,6 +22,20 @@ die()  { echo ""; echo "❌ $*"; exit 1; }
 step() { echo "$*"; }
 ok()   { echo "   ✓ $*"; }
 
+ensure_brew_pkg() {
+    local pkg="$1"
+    local hint="$2"
+
+    if brew list "$pkg" >/dev/null 2>&1; then
+        ok "${pkg} present"
+        return 0
+    fi
+
+    step "   Installing ${pkg} (${hint})..."
+    brew install "$pkg"
+    ok "${pkg} installed"
+}
+
 show_failure_logs() {
     if [ -f "$LOG_FILE" ]; then
         echo ""
@@ -80,6 +94,13 @@ echo ""
 # ── Preflight ────────────────────────────────────────────────────────────────
 step "🔎 Preflight checks..."
 command -v php >/dev/null 2>&1 || die "php not found in PATH"
+command -v brew >/dev/null 2>&1 || die "Homebrew not found. Install from https://brew.sh"
+
+if ! command -v pkg-config >/dev/null 2>&1; then
+    ensure_brew_pkg "pkg-config" "dependency discovery"
+fi
+ensure_brew_pkg "libftdi" "FTDI headers and library"
+ensure_brew_pkg "libusb" "USB transport headers and library"
 
 if [ -n "${ZEPHIR_BIN:-}" ]; then
     ZEPHIR="$ZEPHIR_BIN"
@@ -129,11 +150,13 @@ ok "PHP version:   ${PHP_VER_MM}"
 ok "PHP binary:    ${PHP_BIN_REAL}"
 ok "Extension dir: ${PHP_EXT_DIR}"
 
-command -v pkg-config >/dev/null 2>&1 || die "pkg-config not found. Install via: brew install pkg-config"
+# Ensure Homebrew pkg-config paths are visible in non-interactive shells.
+HOMEBREW_PREFIX="$(brew --prefix)"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
 if pkg-config --exists libftdi1; then
     ok "Found libftdi1: $(pkg-config libftdi1 --modversion)"
 else
-    die "libftdi1 not found. Install via: brew install libftdi"
+    die "libftdi1 still not found after dependency install."
 fi
 
 export CFLAGS="${CFLAGS:-} -Wno-error -Wno-error=incompatible-pointer-types -Wno-pointer-compare"
