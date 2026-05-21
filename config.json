@@ -3,7 +3,7 @@
     "name": "ftdi",
     "description": "The PHP FTDI Extension - bindings for libftdi1",
     "author": "Project Saturn Studios, LLC",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "extra-sources": [
         "src/ftdi-eeprom.c"
     ],
