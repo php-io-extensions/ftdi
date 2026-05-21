@@ -42,7 +42,7 @@ if test "$PHP_FTDI" = "yes"; then
 	ftdi/ftdieeprom.zep.c
 	ftdi/ftditransfercontrol.zep.c
 	ftdi/ftdiversioninfo.zep.c
-	ftdi/i2c.zep.c src/ftdi-eeprom.c"
+	src/ftdi-eeprom.c"
 	PHP_NEW_EXTENSION(ftdi, $ftdi_sources, $ext_shared,,  $PHP_LIBFTDI1_INCS )
 	PHP_ADD_BUILD_DIR([$ext_builddir/kernel/])
 	for dir in "ftdi" "src"; do

@@ -11,7 +11,7 @@
 #include "kernel/globals.h"
 
 #define PHP_FTDI_NAME        "ftdi"
-#define PHP_FTDI_VERSION     "0.2.0"
+#define PHP_FTDI_VERSION     "0.4.2"
 #define PHP_FTDI_EXTNAME     "ftdi"
 #define PHP_FTDI_AUTHOR      "Project Saturn Studios, LLC"
 #define PHP_FTDI_ZEPVERSION  "0.19.0-$Id$"
