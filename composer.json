@@ -1,0 +1,31 @@
+{
+    "name": "php-io-extensions/ftdi",
+    "type": "php-ext",
+    "description": "The PHP FTDI Extension - bindings for libftdi1",
+    "license": "MIT",
+    "version": "0.4.0",
+    "authors": [
+        {
+            "name": "Project Saturn Studios, LLC",
+            "email": "info@projectsaturnstudios.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3"
+    },
+    "php-ext": {
+        "extension-name": "ftdi",
+        "priority": 30,
+        "build-path": "ext",
+        "support-zts": true,
+        "support-nts": true,
+        "os-families-exclude": ["windows"],
+        "configure-options": [
+            {
+                "name": "enable-ftdi",
+                "description": "Enable the FTDI MPSSE extension",
+                "needs-value": false
+            }
+        ]
+    }
+}

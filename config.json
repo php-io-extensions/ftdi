@@ -1,0 +1,30 @@
+{
+    "namespace": "ftdi",
+    "name": "ftdi",
+    "description": "The PHP FTDI Extension - bindings for libftdi1",
+    "author": "Project Saturn Studios, LLC",
+    "version": "0.4.0",
+    "extra-sources": [
+        "src/ftdi-eeprom.c"
+    ],
+    "optimizer-dirs": [
+        "optimizers"
+    ],
+    "warnings": {
+        "unused-variable": false,
+        "unused-variable-external": false,
+        "possible-wrong-parameter": true,
+        "possible-wrong-parameter-undefined": true,
+        "nonexistent-function": true,
+        "nonexistent-class": true
+    },
+    "optimizations": {
+        "call-gatherer-pass": true,
+        "check-invalid-reads": true,
+        "constant-folding": true,
+        "local-context-pass": true,
+        "static-constant-class-folding": true,
+        "static-type-inference": true,
+        "static-type-inference-second-pass": true
+    }
+}

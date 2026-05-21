@@ -1,0 +1,17 @@
+ARG_ENABLE("ftdi", "enable ftdi", "no");
+
+if (PHP_FTDI != "no") {
+  EXTENSION("ftdi", "ftdi.c", null, "-I"+configure_module_dirname);
+  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c math.c concat.c variables.c filter.c iterator.c exit.c time.c", "ftdi");
+  /* PCRE is always included on WIN32 */
+  AC_DEFINE("ZEPHIR_USE_PHP_PCRE", 1, "Whether PHP pcre extension is present at compile time");
+  if (PHP_JSON != "no") {
+    ADD_EXTENSION_DEP("ftdi", "json");
+    AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
+  }
+  ADD_SOURCES(configure_module_dirname + "/src", "ftdi-eeprom.c", "ftdi");
+  ADD_SOURCES(configure_module_dirname + "/ftdi", "ftdi.zep.c ftdicontext.zep.c ftdieeprom.zep.c ftditransfercontrol.zep.c ftdiversioninfo.zep.c", "ftdi");
+  ADD_FLAG("CFLAGS_FTDI", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
+  ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
+  ADD_FLAG("LDFLAGS", "/LTCG");
+}
