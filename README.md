@@ -2,6 +2,8 @@
 
 This project provides direct bindings to [libftdi1](https://www.intra2net.com/en/developer/libftdi/).
 
+Extension repository: [https://github.com/php-io-extensions/ftdi](https://github.com/php-io-extensions/ftdi)
+
 ## Highlights
 
 * Direct access to libftdi1 functions from PHP
@@ -105,6 +107,24 @@ FTDI::ftdiFree($ftdi);
 ```
 
 Constants and enum values follow libftdi1 conventions. Define them in PHP or load them from your platform headers.
+
+### C-ish global helper style
+
+This extension can also be used in a C-ish style through global helper methods by installing [`microscrap/ftdi`](https://github.com/microscrap/ftdi).
+
+```bash
+composer require microscrap/ftdi
+```
+
+If you want to utilize MPSSE, install [`microscrap/mpsse`](https://github.com/microscrap/mpsse) instead:
+
+```bash
+composer require microscrap/mpsse
+```
+
+`microscrap/mpsse` also installs `microscrap/ftdi`.
+
+You can also roll your own helper layer, or use this extension directly without helper packages.
 
 ---
 
