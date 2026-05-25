@@ -3,7 +3,7 @@
     "type": "php-ext",
     "description": "The PHP FTDI Extension - bindings for libftdi1",
     "license": "MIT",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "authors": [
         {
             "name": "Project Saturn Studios, LLC",
