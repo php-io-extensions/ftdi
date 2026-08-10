@@ -22,7 +22,7 @@ sources:
 
 Package version is **0.7.0**, but committed IDE stubs still live under `ide/0.2.0/`.[^ide-020][^composer]
 
-Treat that tree as a **lagging autocomplete aid**, not as the source of truth for the public API. Source of truth is `ftdi/*.zep` + `src/ftdi-eeprom.h` + README.
+Treat that tree as a **lagging autocomplete aid**, not as the source of truth for the public API. Source of truth is `ftdi/*.zep` + `src/ftdi-eeprom.h` + ScrapyardIO ecosystem **0.7.x** docs (package README only links there).
 
 The stub tree also includes `ide/0.2.0/Ftdi/I2C.php`, which is **not** a Zephir class in the current package — another reason not to trust stubs as API inventory.
 

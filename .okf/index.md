@@ -6,7 +6,7 @@ okf_version: "0.2"
 
 Cross-platform (Linux + macOS) PHP extension: Zephir static class `Ftdi\FTDI` plus opaque companion DTOs (`FTDIContext`, `FTDIEeprom`, `FTDITransferControl`, `FTDIVersionInfo`) that call **libftdi1** (with a thin EEPROM/chip-id helper in `src/ftdi-eeprom.{c,h}`). Contexts carry opaque `handle` integers — not flat POSIX FDs like posi. Windows is excluded. No FFI. Version **0.7.0** (0.7.x reconstitution / version-alignment pass; prior line was 0.5.0).
 
-**Prefer** concepts with `status: stable` when present; content is currently `draft` pending Angel’s human verification of the OKF docs (implementation facts are grounded in shipped Zephir/`src/`/`ext/`/README).
+**Prefer** concepts with `status: stable` when present; content is currently `draft` pending Angel’s human verification of the OKF docs (implementation facts are grounded in shipped Zephir/`src/`/`ext/` plus ScrapyardIO ecosystem **0.7.x** pages — package README is a docs pointer only).
 
 # Orientation
 

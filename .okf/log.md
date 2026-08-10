@@ -1,5 +1,10 @@
 # Directory Update Log
 
+## 2026-08-10
+* **Packaging / docs pointer**: Prepared mergeable sibling tree `php-io-extensions/ftdi-0.7` (copy of the 0.7.x line) so `0.5.x` `ext/` stays untouched. No Zephir/API code changes. Confirmed ship-ready `ext/` alignment: `PHP_FTDI_VERSION` / `composer.json` / `config.json` all **0.7.0**; `ext/src` mirrors `src/`; no phpize junk under `ext/`.
+* **README**: Replaced the long in-repo API dump with a Tubes-style README that points at production ScrapyardIO ecosystem docs (`https://scrapyard-io.projectsaturnstudios.com/ecosystem/php-io-extensions/ftdi/0.7.x/…`). Public API truth remains `ftdi/*.zep` + `src/ftdi-eeprom.h` + website 0.7.x pages — not the package README.
+* **Website**: `php-io-extensions/ftdi` already registered in `EcosystemContentManifest` with default **0.7.x**; eight standard pages already present under `database/seeders/content/ecosystem/php-io-extensions/ftdi/0.7.x/`.
+
 ## 2026-08-09
 * **Initialization**: Created OKF v0.2 knowledge bundle for `php-io-extensions/ftdi` at package root `.okf/`, grounded in `composer.json` / `config.json` / `ext/php_ftdi.h` (**0.7.0**), `ftdi/{ftdi,ftdicontext,ftdieeprom,ftditransfercontrol,ftdiversioninfo}.zep`, `src/ftdi-eeprom.{c,h}`, `optimizers/`, README, and installers (`install-macos.sh`, `install-debian-trixie.sh`, `pre-install.sh`). Prior release line was **0.5.0**; this documents the 0.7.x reconstitution / version-alignment pass.
 * **Creation**: Orientation (overview, stack segmentation vs `microscrap/ftdi` + MPSSE / USB drivers), architecture (stack, libftdi1 binding, EEPROM C helpers), API (`FTDI` grouped surface + companion DTOs), build/packaging (libftdi1 required; PIE from committed `ext/`), conventions (sibling patterns, handle ownership, no FFI, constants outside), traps (Windows excluded, do-not-rebuild-in-place, no-sudo-pie-from-checkout, IDE stub lag, libftdi1 required, context free), playbooks (open/baud demo; regenerate-ext on a **copy**); package-root `AGENTS.md`; `.gitattributes` `export-ignore` for `.okf/` and `AGENTS.md`.
