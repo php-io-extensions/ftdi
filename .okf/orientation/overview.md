@@ -32,7 +32,7 @@ sources:
 |------|--------|
 | Package | `php-io-extensions/ftdi` |
 | Extension name | `ftdi` |
-| Version | `0.7.0` |
+| Version | `0.8.0` |
 | Prior release line | `0.5.0` (this cut is 0.7.x reconstitution / version alignment) |
 | PHP | `>= 8.3` (composer + README agree) |
 | Native library | **libftdi1** (compile + runtime; pkg-config `libftdi1`) |
@@ -41,7 +41,7 @@ sources:
 | Author | Project Saturn Studios, LLC |
 | License | MIT |
 
-Version strings are aligned at **0.7.0** in `composer.json`, `config.json`, and `PHP_FTDI_VERSION` in `ext/php_ftdi.h`.[^composer][^config][^php-h]
+Version strings are aligned at **0.8.0** in `composer.json`, `config.json`, and `PHP_FTDI_VERSION` in `ext/php_ftdi.h`.[^composer][^config][^php-h]
 
 # End capability
 
@@ -70,7 +70,7 @@ Version strings are aligned at **0.7.0** in `composer.json`, `config.json`, and 
 | `Ftdi\FTDITransferControl` | `ftdi/ftditransfercontrol.zep` | Async transfer DTO |
 | `Ftdi\FTDIVersionInfo` | `ftdi/ftdiversioninfo.zep` | Library version DTO |
 
-IDE stubs currently live under `ide/0.2.0/` — they **lag** 0.7.0 (see [IDE stub path lag](/traps/ide-stub-path-lag.md)); do not regenerate stubs as part of routine agent work.
+IDE stubs currently live under `ide/0.2.0/` — they **lag** 0.8.0 (see [IDE stub path lag](/traps/ide-stub-path-lag.md)); do not regenerate stubs as part of routine agent work.
 
 See [Stack segmentation](/orientation/stack-segmentation.md) and [Layered stack](/architecture/stack.md).
 

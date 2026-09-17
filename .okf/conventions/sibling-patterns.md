@@ -25,7 +25,7 @@ sources:
 | Constants outside extension | App / microscrap enums | posi / sdl3 |
 | Windows excluded | `os-families-exclude: ["windows"]` | posi / sdl3 |
 | Zephir `optimizer-dirs` | `optimizers/` | posi |
-| Version line **0.7.0** | Alignment pass from 0.5.0 | ecosystem 0.7.x |
+| Version line **0.8.0** | Relabel from 0.7.0 | ecosystem 0.8.x |
 
 # Distinctives
 

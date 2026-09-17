@@ -39,7 +39,7 @@ Ensure **libftdi1** is installed on the build host first.[^readme]
 
 # Steps
 
-1. Confirm version targets are **0.7.0** (or the release you intend) in `composer.json`, `config.json`, and plan the matching `PHP_FTDI_VERSION` string.[^composer][^config][^php-h]
+1. Confirm version targets are **0.8.0** (or the release you intend) in `composer.json`, `config.json`, and plan the matching `PHP_FTDI_VERSION` string.[^composer][^config][^php-h]
 
 2. Copy the package:
 

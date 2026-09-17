@@ -1,6 +1,14 @@
 # Directory Update Log
 
+## 2026-08-10
+* **Packaging / docs pointer**: Prepared mergeable sibling tree `php-io-extensions/ftdi-0.7` (copy of the 0.7.x line) so `0.5.x` `ext/` stays untouched. No Zephir/API code changes. Confirmed ship-ready `ext/` alignment: `PHP_FTDI_VERSION` / `composer.json` / `config.json` all **0.7.0**; `ext/src` mirrors `src/`; no phpize junk under `ext/`.
+* **README**: Replaced the long in-repo API dump with a Tubes-style README that points at production ScrapyardIO ecosystem docs (`https://scrapyard-io.projectsaturnstudios.com/ecosystem/php-io-extensions/ftdi/0.7.x/…`). Public API truth remains `ftdi/*.zep` + `src/ftdi-eeprom.h` + website 0.7.x pages — not the package README.
+* **Website**: `php-io-extensions/ftdi` already registered in `EcosystemContentManifest` with default **0.7.x**; eight standard pages already present under `database/seeders/content/ecosystem/php-io-extensions/ftdi/0.7.x/`.
+
 ## 2026-08-09
 * **Initialization**: Created OKF v0.2 knowledge bundle for `php-io-extensions/ftdi` at package root `.okf/`, grounded in `composer.json` / `config.json` / `ext/php_ftdi.h` (**0.7.0**), `ftdi/{ftdi,ftdicontext,ftdieeprom,ftditransfercontrol,ftdiversioninfo}.zep`, `src/ftdi-eeprom.{c,h}`, `optimizers/`, README, and installers (`install-macos.sh`, `install-debian-trixie.sh`, `pre-install.sh`). Prior release line was **0.5.0**; this documents the 0.7.x reconstitution / version-alignment pass.
 * **Creation**: Orientation (overview, stack segmentation vs `microscrap/ftdi` + MPSSE / USB drivers), architecture (stack, libftdi1 binding, EEPROM C helpers), API (`FTDI` grouped surface + companion DTOs), build/packaging (libftdi1 required; PIE from committed `ext/`), conventions (sibling patterns, handle ownership, no FFI, constants outside), traps (Windows excluded, do-not-rebuild-in-place, no-sudo-pie-from-checkout, IDE stub lag, libftdi1 required, context free), playbooks (open/baud demo; regenerate-ext on a **copy**); package-root `AGENTS.md`; `.gitattributes` `export-ignore` for `.okf/` and `AGENTS.md`.
 * **Note**: All concepts marked `status: draft` pending Angel human verification. IDE stubs remain `ide/0.2.0` (lag; includes stale `I2C.php` stub) — not regenerated. PHP require documented as `>=8.3` (composer + README). Downstream `microscrap/ftdi` / `microscrap/mpsse` mentioned only as composition boundaries. Optional MPSSE workflow depends on separate **mpsse** install — not a PHP Composer dep of this extension.
+
+## 2026-09-17
+* **Update**: version relabelled **0.8.0** in `config.json`, `PHP_FTDI_VERSION`, README and the concepts that state it; `composer.json` already said 0.8.0. Built from a copy per the playbook; Herd PHP 8.4 reports 0.8.0.

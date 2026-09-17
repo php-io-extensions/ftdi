@@ -27,7 +27,7 @@ PIE/`phpize` builds from the pre-generated C tree under `ext/` (`build-path: ext
 
 | Artifact | Role |
 |----------|------|
-| `ext/php_ftdi.h` | `PHP_FTDI_VERSION` (`0.7.0`)[^php-h] |
+| `ext/php_ftdi.h` | `PHP_FTDI_VERSION` (`0.8.0`)[^php-h] |
 | `ext/ftdi/*.zep.c` / `.zep.h` | Generated Zephir C |
 | `ext/src/ftdi-eeprom.{c,h}` | Mirror of package `src/` helpers[^eeprom-ext] |
 | `ext/config.m4` | Autoconf for `--enable-ftdi` + libftdi1 |
@@ -36,11 +36,11 @@ Integrity rule: **phpize / configure / make from `ext/` must work without Zephir
 
 # Version alignment
 
-Package version **0.7.0** is recorded in:
+Package version **0.8.0** is recorded in:
 
-- `composer.json` → `"version": "0.7.0"`
-- `config.json` → `"version": "0.7.0"`
-- `ext/php_ftdi.h` → `PHP_FTDI_VERSION "0.7.0"`
+- `composer.json` → `"version": "0.8.0"`
+- `config.json` → `"version": "0.8.0"`
+- `ext/php_ftdi.h` → `PHP_FTDI_VERSION "0.8.0"`
 
 Prior release line was **0.5.0**; this is the 0.7.x reconstitution / version-alignment pass.
 
