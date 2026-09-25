@@ -10,7 +10,7 @@ pie install php-io-extensions/ftdi
 php -m | grep ftdi
 ```
 
-Linux + macOS only (Windows excluded). Version line: **0.8.x** (`0.8.0`).
+Linux + macOS only (Windows excluded). Version line: **0.9.x** (`0.9.0`).
 
 ### Official Documentation
 

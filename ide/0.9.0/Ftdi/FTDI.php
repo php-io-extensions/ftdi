@@ -384,9 +384,58 @@ class FTDI
 
     /**
      * @param \Ftdi\FTDITransferControl $tc
+     * @return string|bool
+     */
+    public static function ftdiTransferReadDone(\Ftdi\FTDITransferControl $tc): bool|string
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDITransferControl $tc
      * @return void
      */
     public static function ftdiTransferDataCancel(\Ftdi\FTDITransferControl $tc): void
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDITransferControl $tc
+     * @return int
+     */
+    public static function ftdiTransferCompleted(\Ftdi\FTDITransferControl $tc): int
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDIContext $ftdi
+     * @return array
+     */
+    public static function ftdiGetPollfds(\Ftdi\FTDIContext $ftdi): array
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDIContext $ftdi
+     * @return int
+     */
+    public static function ftdiPollfdsHandleTimeouts(\Ftdi\FTDIContext $ftdi): int
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDIContext $ftdi
+     * @return array
+     */
+    public static function ftdiGetNextTimeout(\Ftdi\FTDIContext $ftdi): array
+    {
+    }
+
+    /**
+     * @param \Ftdi\FTDIContext $ftdi
+     * @param int $timeoutUs
+     * @return int
+     */
+    public static function ftdiHandleEventsTimeout(\Ftdi\FTDIContext $ftdi, int $timeoutUs): int
     {
     }
 

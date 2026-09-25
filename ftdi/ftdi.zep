@@ -9,6 +9,7 @@ use Ftdi\FTDIVersionInfo;
 #include <stdint.h>
 #include <sys/time.h>
 #include <libftdi1/ftdi.h>
+#include <libusb.h>
 /* Not in public ftdi.h; wraps internal ftdi_convert_baudrate for testing. */
 extern int convert_baudrate_UT_export(int baudrate, struct ftdi_context *ftdi,
                                       unsigned short *value, unsigned short *index);
@@ -65,7 +66,11 @@ class FTDI
         int maxPacketSize;
         int moduleDetachMode;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let errorStr = "";
         %{
+            zval_ptr_dtor(&errorStr);
+            ZVAL_EMPTY_STRING(&errorStr);
             struct ftdi_context *_ctx = ftdi_new();
             if (!_ctx) {
                 handle             = (zend_long)-1;
@@ -203,7 +208,14 @@ class FTDI
         int minor;
         int micro;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let versionStr = "";
+        let snapshotStr = "";
         %{
+            zval_ptr_dtor(&versionStr);
+            ZVAL_EMPTY_STRING(&versionStr);
+            zval_ptr_dtor(&snapshotStr);
+            ZVAL_EMPTY_STRING(&snapshotStr);
             struct ftdi_version_info _vi = ftdi_get_library_version();
             major = (zend_long)_vi.major;
             minor = (zend_long)_vi.minor;
@@ -283,7 +295,17 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let manufacturer = "";
+        let description = "";
+        let serial = "";
         %{
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&description);
+            ZVAL_EMPTY_STRING(&description);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct libusb_device *_dev = (struct libusb_device *)(uintptr_t)devHandle;
             char _mnf[256]   = {0};
@@ -324,7 +346,17 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let manufacturer = "";
+        let description = "";
+        let serial = "";
         %{
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&description);
+            ZVAL_EMPTY_STRING(&description);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct libusb_device *_dev = (struct libusb_device *)(uintptr_t)devHandle;
             char _mnf[256]     = {0};
@@ -828,10 +860,13 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let out = "";
         %{
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
 
-            ZVAL_EMPTY_STRING(&out);
             if (_ctx) {
                 unsigned char *_buf = (unsigned char *)emalloc((size_t)size);
                 if (_buf) {
@@ -935,23 +970,27 @@ class FTDI
         %{
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct ftdi_transfer_control *_tc = NULL;
+            unsigned char *_buf = NULL;
+            size_t _len = Z_STRLEN_P(data);
 
-            tcHandle      = (zend_long)0;
-            completed     = (zend_long)0;
-            transferSize  = (zend_long)0;
-            offset        = (zend_long)0;
-            contextHandle = (zend_long)0;
-            bufHandle     = (zend_long)0;
+            tcHandle = completed = transferSize = offset = contextHandle = bufHandle = (zend_long)0;
 
-            if (_ctx) {
-                _tc = ftdi_write_data_submit(_ctx, (unsigned char *)Z_STRVAL_P(data), size);
+            if (size < 0) { size = 0; }
+            if ((size_t)size > _len) { size = (zend_long)_len; }
+
+            if (_ctx && size > 0) {
+                _buf = (unsigned char *)emalloc((size_t)size);
+                memcpy(_buf, Z_STRVAL_P(data), (size_t)size);
+                _tc = ftdi_write_data_submit(_ctx, _buf, (int)size);
                 if (_tc) {
                     tcHandle      = (zend_long)(uintptr_t)_tc;
                     completed     = (zend_long)_tc->completed;
                     transferSize  = (zend_long)_tc->size;
                     offset        = (zend_long)_tc->offset;
                     contextHandle = (zend_long)(uintptr_t)_tc->ftdi;
-                    bufHandle     = (zend_long)(uintptr_t)_tc->buf;
+                    bufHandle     = (zend_long)(uintptr_t)_buf;
+                } else {
+                    efree(_buf);
                 }
             }
         }%
@@ -1024,9 +1063,11 @@ class FTDI
     public static function ftdiTransferDataDone(<FTDITransferControl> tc) -> int
     {
         int handle;
+        int bufHandle;
         int result;
 
         let handle = tc->handle;
+        let bufHandle = tc->bufHandle;
 
         %{
             struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
@@ -1034,16 +1075,68 @@ class FTDI
             if (_tc) {
                 result = (zend_long)ftdi_transfer_data_done(_tc);
             }
+            if (bufHandle) {
+                efree((void *)(uintptr_t)bufHandle);
+            }
         }%
 
+        let tc->handle = 0;
+        let tc->bufHandle = 0;
+        let tc->completed = 1;
+        if result >= 0 {
+            let tc->offset = result;
+        }
+
         return result;
+    }
+
+    public static function ftdiTransferReadDone(<FTDITransferControl> tc) -> string | bool
+    {
+        var out;
+        int handle;
+        int bufHandle;
+        int result;
+
+        let handle = tc->handle;
+        let bufHandle = tc->bufHandle;
+        // Zephir owns out (tracked, so released after the return copies it); a bool literal would narrow it
+        // to a native C bool, so it starts as a string and the C swaps the placeholder for false
+        let out = "";
+
+        %{
+            zval_ptr_dtor(&out);
+            ZVAL_FALSE(&out);
+            struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
+            unsigned char *_buf = (unsigned char *)(uintptr_t)bufHandle;
+            result = (zend_long)-1;
+            if (_tc) {
+                result = (zend_long)ftdi_transfer_data_done(_tc);
+                if (result >= 0 && _buf) {
+                    ZVAL_STRINGL(&out, (const char *)_buf, (size_t)result);
+                }
+            }
+            if (_buf) {
+                efree(_buf);
+            }
+        }%
+
+        let tc->handle = 0;
+        let tc->bufHandle = 0;
+        let tc->completed = 1;
+        if result >= 0 {
+            let tc->offset = result;
+        }
+
+        return out;
     }
 
     public static function ftdiTransferDataCancel(<FTDITransferControl> tc) -> void
     {
         int handle;
+        int bufHandle;
 
         let handle = tc->handle;
+        let bufHandle = tc->bufHandle;
 
         %{
             struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
@@ -1053,7 +1146,132 @@ class FTDI
             if (_tc) {
                 (void)ftdi_transfer_data_cancel(_tc, &_to);
             }
+            if (bufHandle) {
+                efree((void *)(uintptr_t)bufHandle);
+            }
         }%
+
+        let tc->handle = 0;
+        let tc->bufHandle = 0;
+        let tc->completed = 1;
+    }
+
+    public static function ftdiTransferCompleted(<FTDITransferControl> tc) -> int
+    {
+        int handle;
+        int completed;
+        int offset;
+
+        let handle = tc->handle;
+        let completed = 0;
+        let offset = tc->offset;
+
+        %{
+            struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
+            if (_tc) {
+                completed = (zend_long)_tc->completed;
+                offset    = (zend_long)_tc->offset;
+            }
+        }%
+
+        let tc->completed = completed;
+        let tc->offset = offset;
+
+        return completed;
+    }
+
+    public static function ftdiGetPollfds(<FTDIContext> ftdi) -> array
+    {
+        var list;
+        int handle;
+
+        let handle = ftdi->handle;
+        let list = [];
+
+        %{
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            const struct libusb_pollfd **_fds = NULL;
+            int _i;
+            zval _entry;
+            if (_ctx && _ctx->usb_ctx) {
+                _fds = libusb_get_pollfds(_ctx->usb_ctx);
+            }
+            if (_fds) {
+                for (_i = 0; _fds[_i] != NULL; _i++) {
+                    array_init(&_entry);
+                    add_assoc_long(&_entry, "fd", (zend_long)_fds[_i]->fd);
+                    add_assoc_long(&_entry, "events", (zend_long)_fds[_i]->events);
+                    add_next_index_zval(&list, &_entry);
+                }
+                libusb_free_pollfds(_fds);
+            }
+        }%
+
+        return list;
+    }
+
+    public static function ftdiPollfdsHandleTimeouts(<FTDIContext> ftdi) -> int
+    {
+        int handle;
+        int result;
+
+        let handle = ftdi->handle;
+
+        %{
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            result = (zend_long)-1;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_pollfds_handle_timeouts(_ctx->usb_ctx);
+            }
+        }%
+
+        return result;
+    }
+
+    public static function ftdiGetNextTimeout(<FTDIContext> ftdi) -> array
+    {
+        int handle;
+        int result;
+        int usec;
+
+        let handle = ftdi->handle;
+
+        %{
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            struct timeval _tv;
+            result = (zend_long)-1;
+            usec = (zend_long)0;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_get_next_timeout(_ctx->usb_ctx, &_tv);
+                if (result == 1) {
+                    usec = (zend_long)_tv.tv_sec * 1000000 + (zend_long)_tv.tv_usec;
+                }
+            }
+        }%
+
+        return ["result": result, "usec": usec];
+    }
+
+    public static function ftdiHandleEventsTimeout(<FTDIContext> ftdi, int timeoutUs) -> int
+    {
+        int handle;
+        int result;
+
+        let handle = ftdi->handle;
+
+        %{
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            struct timeval _tv;
+            result = (zend_long)-1;
+            if (timeoutUs < 0) { timeoutUs = 0; }
+            _tv.tv_sec = timeoutUs / 1000000;
+            _tv.tv_usec = timeoutUs % 1000000;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_handle_events_timeout_completed(_ctx->usb_ctx, &_tv, NULL);
+            }
+        }%
+
+        return result;
     }
 
     public static function ftdiDisableBitbang(<FTDIContext> ftdi) -> int
@@ -1639,7 +1857,17 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let manufacturer = "";
+        let product = "";
+        let serial = "";
         %{
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&product);
+            ZVAL_EMPTY_STRING(&product);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             char _mnf[256]   = {0};
             char _prod[256]  = {0};
@@ -1768,10 +1996,13 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let out = "";
         %{
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
 
-            ZVAL_EMPTY_STRING(&out);
             if (_ctx) {
                 unsigned char *_buf = (unsigned char *)emalloc((size_t)size);
                 if (_buf) {
@@ -1846,11 +2077,14 @@ class FTDI
 
         let eepromHandle = eeprom->eepromHandle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let out = "";
         %{
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_eeprom *_eep = (struct ftdi_eeprom *)(uintptr_t)eepromHandle;
             unsigned char _buf[64] = {0};
 
-            ZVAL_EMPTY_STRING(&out);
             if (_eep) {
                 set_ft232h_cbus(_eep, _buf);
                 ZVAL_STRINGL(&out, (char *)(_buf + 0x18), (size_t)5);
@@ -1998,7 +2232,11 @@ class FTDI
 
         let handle = ftdi->handle;
 
+        // Zephir owns these (tracked, so released after the return copies them); the C swaps each placeholder for the interned "" before writing
+        let out = "";
         %{
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             const char *_err = NULL;
             if (_ctx) {

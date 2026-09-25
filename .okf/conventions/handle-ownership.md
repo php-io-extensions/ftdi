@@ -4,7 +4,7 @@ title: Handle ownership
 description: Caller owns FTDIContext, device lists, and transfer controls; PHP GC does not free them
 tags: [ftdi, convention, memory, handles]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: ftdi-zep
     resource: /ftdi/ftdi.zep
@@ -23,7 +23,7 @@ sources:
 |----------|--------|---------|
 | Context | `FTDI::ftdiNew` (+ `ftdiInit` as needed) | `ftdiUSBClose` (if open) → `ftdiDeinit` → `ftdiFree` |
 | Device list | `ftdiUSBFindAll` → `listHandle` | `ftdiListFree` or `ftdiListFree2` |
-| Async transfer | `ftdiWriteDataSubmit` / `ftdiReadDataSubmit` | `ftdiTransferDataDone` or `ftdiTransferDataCancel` |
+| Async transfer | `ftdiWriteDataSubmit` / `ftdiReadDataSubmit` | `ftdiTransferDataDone`, `ftdiTransferReadDone` or `ftdiTransferDataCancel` (one terminal call) |
 
 # Semantics
 
@@ -31,6 +31,7 @@ sources:
 - Dropping an `FTDIContext` without `ftdiFree` **leaks** native libftdi1 state.[^ftdi-zep]
 - After `ftdiFree`, do not reuse the context object.
 - List handles from `ftdiUSBFindAll` must be freed explicitly.
+- Transfer buffers belong to the extension and are freed by the terminal call, never by the caller. The call zeroes `handle` and `bufHandle`, so repeating it is safe. A control dropped without a terminal call leaks its buffer.
 
 # Checklist
 

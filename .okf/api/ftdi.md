@@ -1,11 +1,11 @@
 ---
 type: API
 title: Ftdi\\FTDI
-description: Static libftdi1 bindings — lifecycle, USB, baud, I/O, bitmode, async, EEPROM, errors
+description: Static libftdi1 bindings — lifecycle, USB, baud, I/O, bitmode, async, event pump, EEPROM, errors
 resource: /ftdi/ftdi.zep
-tags: [ftdi, api, FTDI, libftdi1]
+tags: [ftdi, api, FTDI, libftdi1, libusb]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: ftdi-zep
     resource: /ftdi/ftdi.zep
@@ -109,10 +109,25 @@ Each takes `(FTDIContext $ftdi): int`.
 
 | Method | Notes |
 |--------|-------|
-| `ftdiWriteDataSubmit` | `(FTDIContext $ftdi, mixed $data, int $size): FTDITransferControl` |
+| `ftdiWriteDataSubmit` | `(FTDIContext $ftdi, mixed $data, int $size): FTDITransferControl` — copies `data` into an extension-owned buffer; `size` clamped to `strlen($data)` |
 | `ftdiReadDataSubmit` | `(FTDIContext $ftdi, int $size): FTDITransferControl` |
-| `ftdiTransferDataDone` | `(FTDITransferControl $tc): int` |
-| `ftdiTransferDataCancel` | `(FTDITransferControl $tc): void` |
+| `ftdiTransferCompleted` | `(FTDITransferControl $tc): int` — refreshes `completed` / `offset` from the struct; `0` when `handle === 0` |
+| `ftdiTransferDataDone` | `(FTDITransferControl $tc): int` — `-1` when `handle === 0` |
+| `ftdiTransferReadDone` | `(FTDITransferControl $tc): string\|false` — first `ret` bytes of the read buffer; `false` when `ret < 0` or `handle === 0` |
+| `ftdiTransferDataCancel` | `(FTDITransferControl $tc): void` — no-op when `handle === 0` |
+
+Since 0.9.0 the PHP string passed to `ftdiWriteDataSubmit` may be freed while the transfer is in flight. Done, read-done and cancel are terminal: each frees the extension-owned buffer and sets `handle` and `bufHandle` to `0`, so a second terminal call returns `-1` / `false` / nothing and never double-frees.[^ftdi-zep]
+
+## Event pump
+
+1:1 libusb bindings over `ftdi_context->usb_ctx`. They let a caller drive async transfers from its own loop instead of blocking in `ftdiTransferDataDone`. Every method returns `-1` (or `[]`) on a dead context.
+
+| Method | Notes |
+|--------|-------|
+| `ftdiGetPollfds` | `(FTDIContext $ftdi): array` — list of `['fd' => int, 'events' => int]`; `[]` when libusb returns `NULL`. libusb 1.0.29 on macOS returns one fd, so don't treat `[]` as the Darwin value |
+| `ftdiPollfdsHandleTimeouts` | `(FTDIContext $ftdi): int` — `libusb_pollfds_handle_timeouts` |
+| `ftdiGetNextTimeout` | `(FTDIContext $ftdi): array` — `['result' => int, 'usec' => int]`; `usec` is set only when `result === 1` |
+| `ftdiHandleEventsTimeout` | `(FTDIContext $ftdi, int $timeoutUs): int` — `libusb_handle_events_timeout_completed(usb_ctx, &tv, NULL)`; negative timeouts clamp to `0` |
 
 ## EEPROM / chip id
 

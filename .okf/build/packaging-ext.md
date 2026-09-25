@@ -5,7 +5,7 @@ description: Ship-ready ext/ tree, version header, and stub lag
 resource: /ext/php_ftdi.h
 tags: [ftdi, build, packaging]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: php-h
     resource: /ext/php_ftdi.h
@@ -27,26 +27,27 @@ PIE/`phpize` builds from the pre-generated C tree under `ext/` (`build-path: ext
 
 | Artifact | Role |
 |----------|------|
-| `ext/php_ftdi.h` | `PHP_FTDI_VERSION` (`0.8.0`)[^php-h] |
+| `ext/php_ftdi.h` | `PHP_FTDI_VERSION` (`0.9.0`)[^php-h] |
 | `ext/ftdi/*.zep.c` / `.zep.h` | Generated Zephir C |
 | `ext/src/ftdi-eeprom.{c,h}` | Mirror of package `src/` helpers[^eeprom-ext] |
-| `ext/config.m4` | Autoconf for `--enable-ftdi` + libftdi1 |
+| `ext/kernel/{file,main,require}.c` | Must equal the `clang/kernel/` overlays, not stock Zephir |
+| `ext/config.m4` | Copy of `clang/config.m4`: `--enable-ftdi` + libftdi1 + libusb-1.0 (the event-pump bindings include `<libusb.h>`; libftdi 1.5's `ftdi.h` does not pull it in) |
 
 Integrity rule: **phpize / configure / make from `ext/` must work without Zephir.** Agents must not leave the committed tree dependent on a local Zephir generate step.
 
 # Version alignment
 
-Package version **0.8.0** is recorded in:
+Package version **0.9.0** is recorded in:
 
-- `composer.json` → `"version": "0.8.0"`
-- `config.json` → `"version": "0.8.0"`
-- `ext/php_ftdi.h` → `PHP_FTDI_VERSION "0.8.0"`
+- `composer.json` → `"version": "0.9.0"`
+- `config.json` → `"version": "0.9.0"`
+- `ext/php_ftdi.h` → `PHP_FTDI_VERSION "0.9.0"`
 
-Prior release line was **0.5.0**; this is the 0.7.x reconstitution / version-alignment pass.
+Prior release lines: 0.8.0, 0.7.0, 0.5.0.
 
-# Stub lag
+# Stubs
 
-IDE stubs under `ide/0.2.0/` lag the package version — see [IDE stub path lag](/traps/ide-stub-path-lag.md). Do not regenerate casually.
+IDE stubs live under `ide/0.9.0/` — see [IDE stub path lag](/traps/ide-stub-path-lag.md).
 
 # Regenerating
 

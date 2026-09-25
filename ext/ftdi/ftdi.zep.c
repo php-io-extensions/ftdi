@@ -21,6 +21,7 @@
 #include <stdint.h>
 #include <sys/time.h>
 #include <libftdi1/ftdi.h>
+#include <libusb.h>
 /* Not in public ftdi.h; wraps internal ftdi_convert_baudrate for testing. */
 extern int convert_baudrate_UT_export(int baudrate, struct ftdi_context *ftdi,
                                       unsigned short *value, unsigned short *index);
@@ -44,7 +45,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiInit)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -80,7 +81,11 @@ PHP_METHOD(Ftdi_FTDI, ftdiNew)
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
 	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
+	ZEPHIR_INIT_VAR(&errorStr);
+	ZVAL_STRING(&errorStr, "");
 	
+            zval_ptr_dtor(&errorStr);
+            ZVAL_EMPTY_STRING(&errorStr);
             struct ftdi_context *_ctx = ftdi_new();
             if (!_ctx) {
                 handle             = (zend_long)-1;
@@ -183,7 +188,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetInterface)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(iface)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &iface_param);
@@ -207,7 +212,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiDeinit)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -228,7 +233,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiFree)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -247,7 +252,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetUSBDev)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(usbDevHandle)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &usbDevHandle_param);
@@ -284,7 +289,15 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetLibraryVersion)
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
 	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
+	ZEPHIR_INIT_VAR(&versionStr);
+	ZVAL_STRING(&versionStr, "");
+	ZEPHIR_INIT_VAR(&snapshotStr);
+	ZVAL_STRING(&snapshotStr, "");
 	
+            zval_ptr_dtor(&versionStr);
+            ZVAL_EMPTY_STRING(&versionStr);
+            zval_ptr_dtor(&snapshotStr);
+            ZVAL_EMPTY_STRING(&snapshotStr);
             struct ftdi_version_info _vi = ftdi_get_library_version();
             major = (zend_long)_vi.major;
             minor = (zend_long)_vi.minor;
@@ -323,7 +336,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBFindAll)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(vendor)
 		Z_PARAM_LONG(product)
 	ZEND_PARSE_PARAMETERS_END();
@@ -395,6 +408,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiListFree2)
 
 PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings)
 {
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long devHandle, handle = 0;
 	zval *ftdi = NULL, ftdi_sub, *devHandle_param = NULL, manufacturer, description, serial, _0;
 
@@ -404,13 +418,27 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings)
 	ZVAL_UNDEF(&serial);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(devHandle)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &devHandle_param);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 2, 0, &ftdi, &devHandle_param);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&manufacturer);
+	ZVAL_STRING(&manufacturer, "");
+	ZEPHIR_INIT_VAR(&description);
+	ZVAL_STRING(&description, "");
+	ZEPHIR_INIT_VAR(&serial);
+	ZVAL_STRING(&serial, "");
 	
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&description);
+            ZVAL_EMPTY_STRING(&description);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct libusb_device *_dev = (struct libusb_device *)(uintptr_t)devHandle;
             char _mnf[256]   = {0};
@@ -438,11 +466,12 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings)
 	zephir_array_update_string(return_value, SL("manufacturer"), &manufacturer, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("description"), &description, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("serial"), &serial, PH_COPY | PH_SEPARATE);
-	return;
+	RETURN_MM();
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings2)
 {
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long devHandle, handle = 0;
 	zval *ftdi = NULL, ftdi_sub, *devHandle_param = NULL, manufacturer, description, serial, _0;
 
@@ -452,13 +481,27 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings2)
 	ZVAL_UNDEF(&serial);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(devHandle)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &devHandle_param);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 2, 0, &ftdi, &devHandle_param);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&manufacturer);
+	ZVAL_STRING(&manufacturer, "");
+	ZEPHIR_INIT_VAR(&description);
+	ZVAL_STRING(&description, "");
+	ZEPHIR_INIT_VAR(&serial);
+	ZVAL_STRING(&serial, "");
 	
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&description);
+            ZVAL_EMPTY_STRING(&description);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct libusb_device *_dev = (struct libusb_device *)(uintptr_t)devHandle;
             char _mnf[256]     = {0};
@@ -486,7 +529,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBGetStrings2)
 	zephir_array_update_string(return_value, SL("manufacturer"), &manufacturer, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("description"), &description, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("serial"), &serial, PH_COPY | PH_SEPARATE);
-	return;
+	RETURN_MM();
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenDev)
@@ -497,7 +540,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenDev)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(devHandle)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &devHandle_param);
@@ -522,7 +565,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpen)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(vendor)
 		Z_PARAM_LONG(product)
 	ZEND_PARSE_PARAMETERS_END();
@@ -549,7 +592,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenDesc)
 	ZVAL_UNDEF(&serial_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(5, 5)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(vendor)
 		Z_PARAM_LONG(product)
 		Z_PARAM_ZVAL(description)
@@ -593,7 +636,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenDescIndex)
 	ZVAL_UNDEF(&serial_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(6, 6)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(vendor)
 		Z_PARAM_LONG(product)
 		Z_PARAM_ZVAL(description)
@@ -637,7 +680,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenBusAddr)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(bus)
 		Z_PARAM_LONG(addr)
 	ZEND_PARSE_PARAMETERS_END();
@@ -667,7 +710,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBOpenString)
 	ZVAL_UNDEF(&description_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(description)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &description);
@@ -691,7 +734,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBClose)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -714,7 +757,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBReset)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -737,7 +780,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiTCIFlush)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -760,7 +803,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiTCOFlush)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -783,7 +826,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiTCIOFlush)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -806,7 +849,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBPurgeRXBuffer)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -829,7 +872,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBPurgeTXBuffer)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -852,7 +895,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiUSBPurgeBuffers)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -878,7 +921,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiConvertBaudrateUTExport)
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
 		Z_PARAM_LONG(baudrate)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
 	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
@@ -917,7 +960,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetBaudrate)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(baudrate)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &baudrate_param);
@@ -941,7 +984,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetLineProperty)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(4, 4)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(bits)
 		Z_PARAM_LONG(sbit)
 		Z_PARAM_LONG(parity)
@@ -972,7 +1015,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetLineProperty2)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(5, 5)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(bits)
 		Z_PARAM_LONG(sbit)
 		Z_PARAM_LONG(parity)
@@ -1006,7 +1049,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteData)
 	ZVAL_UNDEF(&data_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(data)
 		Z_PARAM_LONG(size)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1046,7 +1089,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteDataSetChunksize)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(chunksize)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &chunksize_param);
@@ -1073,7 +1116,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteDataGetChunksize)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1097,6 +1140,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteDataGetChunksize)
 
 PHP_METHOD(Ftdi_FTDI, ftdiReadData)
 {
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long size, handle = 0;
 	zval *ftdi = NULL, ftdi_sub, *size_param = NULL, out, _0;
 
@@ -1104,19 +1148,24 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadData)
 	ZVAL_UNDEF(&out);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(size)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &size_param);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 2, 0, &ftdi, &size_param);
 	if (size <= 0) {
-		RETURN_STRING("");
+		RETURN_MM_STRING("");
 	}
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&out);
+	ZVAL_STRING(&out, "");
 	
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
 
-            ZVAL_EMPTY_STRING(&out);
             if (_ctx) {
                 unsigned char *_buf = (unsigned char *)emalloc((size_t)size);
                 if (_buf) {
@@ -1132,7 +1181,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadData)
                 }
             }
         
-	RETURN_CCTORW(&out);
+	RETURN_CCTOR(&out);
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiReadDataSetChunksize)
@@ -1143,7 +1192,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadDataSetChunksize)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(chunksize)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &chunksize_param);
@@ -1170,7 +1219,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadDataGetChunksize)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1200,7 +1249,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetBitmode)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(bitmask)
 		Z_PARAM_LONG(mode)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1233,7 +1282,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteDataSubmit)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(data)
 		Z_PARAM_LONG(size)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1245,23 +1294,27 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteDataSubmit)
 	
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             struct ftdi_transfer_control *_tc = NULL;
+            unsigned char *_buf = NULL;
+            size_t _len = Z_STRLEN_P(data);
 
-            tcHandle      = (zend_long)0;
-            completed     = (zend_long)0;
-            transferSize  = (zend_long)0;
-            offset        = (zend_long)0;
-            contextHandle = (zend_long)0;
-            bufHandle     = (zend_long)0;
+            tcHandle = completed = transferSize = offset = contextHandle = bufHandle = (zend_long)0;
 
-            if (_ctx) {
-                _tc = ftdi_write_data_submit(_ctx, (unsigned char *)Z_STRVAL_P(data), size);
+            if (size < 0) { size = 0; }
+            if ((size_t)size > _len) { size = (zend_long)_len; }
+
+            if (_ctx && size > 0) {
+                _buf = (unsigned char *)emalloc((size_t)size);
+                memcpy(_buf, Z_STRVAL_P(data), (size_t)size);
+                _tc = ftdi_write_data_submit(_ctx, _buf, (int)size);
                 if (_tc) {
                     tcHandle      = (zend_long)(uintptr_t)_tc;
                     completed     = (zend_long)_tc->completed;
                     transferSize  = (zend_long)_tc->size;
                     offset        = (zend_long)_tc->offset;
                     contextHandle = (zend_long)(uintptr_t)_tc->ftdi;
-                    bufHandle     = (zend_long)(uintptr_t)_tc->buf;
+                    bufHandle     = (zend_long)(uintptr_t)_buf;
+                } else {
+                    efree(_buf);
                 }
             }
         
@@ -1304,7 +1357,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadDataSubmit)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(size)
 	ZEND_PARSE_PARAMETERS_END();
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
@@ -1371,40 +1424,132 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadDataSubmit)
 
 PHP_METHOD(Ftdi_FTDI, ftdiTransferDataDone)
 {
-	zend_long handle = 0, result = 0;
-	zval *tc = NULL, tc_sub, _0;
+	zend_long handle = 0, bufHandle = 0, result = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *tc = NULL, tc_sub, _0, _1, _2, _3$$3;
 
 	ZVAL_UNDEF(&tc_sub);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3$$3);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(tc, zephir_get_internal_ce(SL("ftdi\\ftditransfercontrol")))
+		Z_PARAM_OBJECT_OF_CLASS(tc, ftdi_ftditransfercontrol_ce)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(1, 0, &tc);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &tc);
+	ZEPHIR_SEPARATE_PARAM(tc);
 	zephir_read_property(&_0, tc, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	zephir_read_property(&_1, tc, ZEND_STRL("bufHandle"), PH_NOISY_CC | PH_READONLY);
+	bufHandle = zephir_get_numberval(&_1);
 	
             struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
             result = (zend_long)-1;
             if (_tc) {
                 result = (zend_long)ftdi_transfer_data_done(_tc);
             }
+            if (bufHandle) {
+                efree((void *)(uintptr_t)bufHandle);
+            }
         
-	RETURN_LONG(result);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("handle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("bufHandle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 1);
+	zephir_update_property_zval(tc, ZEND_STRL("completed"), &_2);
+	if (result >= 0) {
+		ZVAL_UNDEF(&_3$$3);
+		ZVAL_LONG(&_3$$3, result);
+		zephir_update_property_zval(tc, ZEND_STRL("offset"), &_3$$3);
+	}
+	RETURN_MM_LONG(result);
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiTransferReadDone)
+{
+	zend_long handle = 0, bufHandle = 0, result = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *tc = NULL, tc_sub, out, _0, _1, _2, _3$$3;
+
+	ZVAL_UNDEF(&tc_sub);
+	ZVAL_UNDEF(&out);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3$$3);
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(tc, ftdi_ftditransfercontrol_ce)
+	ZEND_PARSE_PARAMETERS_END();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &tc);
+	ZEPHIR_SEPARATE_PARAM(tc);
+	zephir_read_property(&_0, tc, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	zephir_read_property(&_1, tc, ZEND_STRL("bufHandle"), PH_NOISY_CC | PH_READONLY);
+	bufHandle = zephir_get_numberval(&_1);
+	ZEPHIR_INIT_VAR(&out);
+	ZVAL_STRING(&out, "");
+	
+            zval_ptr_dtor(&out);
+            ZVAL_FALSE(&out);
+            struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
+            unsigned char *_buf = (unsigned char *)(uintptr_t)bufHandle;
+            result = (zend_long)-1;
+            if (_tc) {
+                result = (zend_long)ftdi_transfer_data_done(_tc);
+                if (result >= 0 && _buf) {
+                    ZVAL_STRINGL(&out, (const char *)_buf, (size_t)result);
+                }
+            }
+            if (_buf) {
+                efree(_buf);
+            }
+        
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("handle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("bufHandle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 1);
+	zephir_update_property_zval(tc, ZEND_STRL("completed"), &_2);
+	if (result >= 0) {
+		ZVAL_UNDEF(&_3$$3);
+		ZVAL_LONG(&_3$$3, result);
+		zephir_update_property_zval(tc, ZEND_STRL("offset"), &_3$$3);
+	}
+	RETURN_CCTOR(&out);
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiTransferDataCancel)
 {
-	zend_long handle = 0;
-	zval *tc = NULL, tc_sub, _0;
+	zend_long handle = 0, bufHandle = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *tc = NULL, tc_sub, _0, _1, _2;
 
 	ZVAL_UNDEF(&tc_sub);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(tc, zephir_get_internal_ce(SL("ftdi\\ftditransfercontrol")))
+		Z_PARAM_OBJECT_OF_CLASS(tc, ftdi_ftditransfercontrol_ce)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(1, 0, &tc);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &tc);
+	ZEPHIR_SEPARATE_PARAM(tc);
 	zephir_read_property(&_0, tc, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	zephir_read_property(&_1, tc, ZEND_STRL("bufHandle"), PH_NOISY_CC | PH_READONLY);
+	bufHandle = zephir_get_numberval(&_1);
 	
             struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
             struct timeval _to;
@@ -1413,7 +1558,188 @@ PHP_METHOD(Ftdi_FTDI, ftdiTransferDataCancel)
             if (_tc) {
                 (void)ftdi_transfer_data_cancel(_tc, &_to);
             }
+            if (bufHandle) {
+                efree((void *)(uintptr_t)bufHandle);
+            }
         
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("handle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 0);
+	zephir_update_property_zval(tc, ZEND_STRL("bufHandle"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, 1);
+	zephir_update_property_zval(tc, ZEND_STRL("completed"), &_2);
+	ZEPHIR_MM_RESTORE();
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiTransferCompleted)
+{
+	zend_long handle = 0, completed = 0, offset = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *tc = NULL, tc_sub, _0, _1, _2;
+
+	ZVAL_UNDEF(&tc_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(tc, ftdi_ftditransfercontrol_ce)
+	ZEND_PARSE_PARAMETERS_END();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &tc);
+	ZEPHIR_SEPARATE_PARAM(tc);
+	zephir_read_property(&_0, tc, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	completed = 0;
+	zephir_read_property(&_1, tc, ZEND_STRL("offset"), PH_NOISY_CC | PH_READONLY);
+	offset = zephir_get_numberval(&_1);
+	
+            struct ftdi_transfer_control *_tc = (struct ftdi_transfer_control *)(uintptr_t)handle;
+            if (_tc) {
+                completed = (zend_long)_tc->completed;
+                offset    = (zend_long)_tc->offset;
+            }
+        
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, completed);
+	zephir_update_property_zval(tc, ZEND_STRL("completed"), &_2);
+	ZVAL_UNDEF(&_2);
+	ZVAL_LONG(&_2, offset);
+	zephir_update_property_zval(tc, ZEND_STRL("offset"), &_2);
+	RETURN_MM_LONG(completed);
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiGetPollfds)
+{
+	zend_long handle = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *ftdi = NULL, ftdi_sub, list, _0;
+
+	ZVAL_UNDEF(&ftdi_sub);
+	ZVAL_UNDEF(&list);
+	ZVAL_UNDEF(&_0);
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
+	ZEND_PARSE_PARAMETERS_END();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &ftdi);
+	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&list);
+	array_init(&list);
+	
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            const struct libusb_pollfd **_fds = NULL;
+            int _i;
+            zval _entry;
+            if (_ctx && _ctx->usb_ctx) {
+                _fds = libusb_get_pollfds(_ctx->usb_ctx);
+            }
+            if (_fds) {
+                for (_i = 0; _fds[_i] != NULL; _i++) {
+                    array_init(&_entry);
+                    add_assoc_long(&_entry, "fd", (zend_long)_fds[_i]->fd);
+                    add_assoc_long(&_entry, "events", (zend_long)_fds[_i]->events);
+                    add_next_index_zval(&list, &_entry);
+                }
+                libusb_free_pollfds(_fds);
+            }
+        
+	RETURN_CCTOR(&list);
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiPollfdsHandleTimeouts)
+{
+	zend_long handle = 0, result = 0;
+	zval *ftdi = NULL, ftdi_sub, _0;
+
+	ZVAL_UNDEF(&ftdi_sub);
+	ZVAL_UNDEF(&_0);
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
+	ZEND_PARSE_PARAMETERS_END();
+	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
+	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            result = (zend_long)-1;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_pollfds_handle_timeouts(_ctx->usb_ctx);
+            }
+        
+	RETURN_LONG(result);
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiGetNextTimeout)
+{
+	zend_long handle = 0, result = 0, usec = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *ftdi = NULL, ftdi_sub, _0, _1;
+
+	ZVAL_UNDEF(&ftdi_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
+	ZEND_PARSE_PARAMETERS_END();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &ftdi);
+	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            struct timeval _tv;
+            result = (zend_long)-1;
+            usec = (zend_long)0;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_get_next_timeout(_ctx->usb_ctx, &_tv);
+                if (result == 1) {
+                    usec = (zend_long)_tv.tv_sec * 1000000 + (zend_long)_tv.tv_usec;
+                }
+            }
+        
+	zephir_create_array(return_value, 2, 0);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_LONG(&_1, result);
+	zephir_array_update_string(return_value, SL("result"), &_1, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_LONG(&_1, usec);
+	zephir_array_update_string(return_value, SL("usec"), &_1, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
+}
+
+PHP_METHOD(Ftdi_FTDI, ftdiHandleEventsTimeout)
+{
+	zend_long timeoutUs, handle = 0, result = 0;
+	zval *ftdi = NULL, ftdi_sub, *timeoutUs_param = NULL, _0;
+
+	ZVAL_UNDEF(&ftdi_sub);
+	ZVAL_UNDEF(&_0);
+	ZEND_PARSE_PARAMETERS_START(2, 2)
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
+		Z_PARAM_LONG(timeoutUs)
+	ZEND_PARSE_PARAMETERS_END();
+	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &timeoutUs_param);
+	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
+	handle = zephir_get_numberval(&_0);
+	
+            struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
+            struct timeval _tv;
+            result = (zend_long)-1;
+            if (timeoutUs < 0) { timeoutUs = 0; }
+            _tv.tv_sec = timeoutUs / 1000000;
+            _tv.tv_usec = timeoutUs % 1000000;
+            if (_ctx && _ctx->usb_ctx) {
+                result = (zend_long)libusb_handle_events_timeout_completed(_ctx->usb_ctx, &_tv, NULL);
+            }
+        
+	RETURN_LONG(result);
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiDisableBitbang)
@@ -1424,7 +1750,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiDisableBitbang)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1447,7 +1773,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadPins)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1476,7 +1802,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetLatencyTimer)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(latency)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &latency_param);
@@ -1503,7 +1829,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetTimeouts)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(readTimeout)
 		Z_PARAM_LONG(writeTimeout)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1527,7 +1853,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetLatencyTimer)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1556,7 +1882,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiPollModemStatus)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -1585,7 +1911,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetFlowCtrl)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(flowctrl)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &flowctrl_param);
@@ -1609,7 +1935,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetFlowCtrlXonXoff)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(xon)
 		Z_PARAM_LONG(xoff)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1638,7 +1964,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetDtr)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(state)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &state_param);
@@ -1662,7 +1988,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetRts)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(state)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &state_param);
@@ -1686,7 +2012,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetDtrRts)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(dtr)
 		Z_PARAM_LONG(rts)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1711,7 +2037,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEventChar)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(eventch)
 		Z_PARAM_LONG(enable)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1740,7 +2066,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetErrorChar)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(errorch)
 		Z_PARAM_LONG(enable)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1775,7 +2101,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetEeprom)
 	ZVAL_UNDEF(&eeprom);
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
 	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
@@ -2123,7 +2449,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromInitDefaults)
 	ZVAL_UNDEF(&serial_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(4, 4)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(manufacturer)
 		Z_PARAM_ZVAL(product)
 		Z_PARAM_ZVAL(serial)
@@ -2174,7 +2500,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromSetStrings)
 	ZVAL_UNDEF(&serial_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(4, 4)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(manufacturer)
 		Z_PARAM_ZVAL(product)
 		Z_PARAM_ZVAL(serial)
@@ -2208,6 +2534,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromSetStrings)
 PHP_METHOD(Ftdi_FTDI, ftdiEepromGetStrings)
 {
 	zend_long handle = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zval *ftdi = NULL, ftdi_sub, manufacturer, product, serial, _0;
 
 	ZVAL_UNDEF(&ftdi_sub);
@@ -2216,12 +2543,26 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromGetStrings)
 	ZVAL_UNDEF(&serial);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&manufacturer);
+	ZVAL_STRING(&manufacturer, "");
+	ZEPHIR_INIT_VAR(&product);
+	ZVAL_STRING(&product, "");
+	ZEPHIR_INIT_VAR(&serial);
+	ZVAL_STRING(&serial, "");
 	
+            zval_ptr_dtor(&manufacturer);
+            ZVAL_EMPTY_STRING(&manufacturer);
+            zval_ptr_dtor(&product);
+            ZVAL_EMPTY_STRING(&product);
+            zval_ptr_dtor(&serial);
+            ZVAL_EMPTY_STRING(&serial);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             char _mnf[256]   = {0};
             char _prod[256]  = {0};
@@ -2247,7 +2588,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromGetStrings)
 	zephir_array_update_string(return_value, SL("manufacturer"), &manufacturer, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("product"), &product, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("serial"), &serial, PH_COPY | PH_SEPARATE);
-	return;
+	RETURN_MM();
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiEepromBuild)
@@ -2258,7 +2599,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromBuild)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -2281,7 +2622,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEepromDecode)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(verbose)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &verbose_param);
@@ -2305,7 +2646,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetEepromValue)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(valueName)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &valueName_param);
@@ -2341,7 +2682,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEepromValue)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(valueName)
 		Z_PARAM_LONG(value)
 	ZEND_PARSE_PARAMETERS_END();
@@ -2364,6 +2705,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEepromValue)
 
 PHP_METHOD(Ftdi_FTDI, ftdiGetEepromBuf)
 {
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long size, handle = 0;
 	zval *ftdi = NULL, ftdi_sub, *size_param = NULL, out, _0;
 
@@ -2371,19 +2713,24 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetEepromBuf)
 	ZVAL_UNDEF(&out);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(size)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &size_param);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 2, 0, &ftdi, &size_param);
 	if (size <= 0) {
-		RETURN_STRING("");
+		RETURN_MM_STRING("");
 	}
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&out);
+	ZVAL_STRING(&out, "");
 	
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
 
-            ZVAL_EMPTY_STRING(&out);
             if (_ctx) {
                 unsigned char *_buf = (unsigned char *)emalloc((size_t)size);
                 if (_buf) {
@@ -2397,7 +2744,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetEepromBuf)
                 }
             }
         
-	RETURN_CCTORW(&out);
+	RETURN_CCTOR(&out);
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiSetEepromBuf)
@@ -2409,7 +2756,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEepromBuf)
 	ZVAL_UNDEF(&buf_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(buf)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &buf);
@@ -2438,7 +2785,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEepromUserData)
 	ZVAL_UNDEF(&buf_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_ZVAL(buf)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &buf);
@@ -2467,28 +2814,34 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetEepromUserData)
 PHP_METHOD(Ftdi_FTDI, setFT232HCbus)
 {
 	zend_long eepromHandle = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zval *eeprom = NULL, eeprom_sub, out, _0;
 
 	ZVAL_UNDEF(&eeprom_sub);
 	ZVAL_UNDEF(&out);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(eeprom, zephir_get_internal_ce(SL("ftdi\\ftdieeprom")))
+		Z_PARAM_OBJECT_OF_CLASS(eeprom, ftdi_ftdieeprom_ce)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(1, 0, &eeprom);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &eeprom);
 	zephir_read_property(&_0, eeprom, ZEND_STRL("eepromHandle"), PH_NOISY_CC | PH_READONLY);
 	eepromHandle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&out);
+	ZVAL_STRING(&out, "");
 	
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_eeprom *_eep = (struct ftdi_eeprom *)(uintptr_t)eepromHandle;
             unsigned char _buf[64] = {0};
 
-            ZVAL_EMPTY_STRING(&out);
             if (_eep) {
                 set_ft232h_cbus(_eep, _buf);
                 ZVAL_STRINGL(&out, (char *)(_buf + 0x18), (size_t)5);
             }
         
-	RETURN_CCTORW(&out);
+	RETURN_CCTOR(&out);
 }
 
 PHP_METHOD(Ftdi_FTDI, ftdiReadEepromLocation)
@@ -2499,7 +2852,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadEepromLocation)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(eepromAddr)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(2, 0, &ftdi, &eepromAddr_param);
@@ -2531,7 +2884,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadEeprom)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -2556,7 +2909,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiReadChipId)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
 	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
@@ -2591,7 +2944,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteEepromLocation)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 		Z_PARAM_LONG(eepromAddr)
 		Z_PARAM_LONG(eepromVal)
 	ZEND_PARSE_PARAMETERS_END();
@@ -2620,7 +2973,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiWriteEeprom)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -2643,7 +2996,7 @@ PHP_METHOD(Ftdi_FTDI, ftdiEraseEeprom)
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
 	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
@@ -2661,18 +3014,25 @@ PHP_METHOD(Ftdi_FTDI, ftdiEraseEeprom)
 PHP_METHOD(Ftdi_FTDI, ftdiGetErrorString)
 {
 	zend_long handle = 0;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zval *ftdi = NULL, ftdi_sub, out, _0;
 
 	ZVAL_UNDEF(&ftdi_sub);
 	ZVAL_UNDEF(&out);
 	ZVAL_UNDEF(&_0);
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(ftdi, zephir_get_internal_ce(SL("ftdi\\ftdicontext")))
+		Z_PARAM_OBJECT_OF_CLASS(ftdi, ftdi_ftdicontext_ce)
 	ZEND_PARSE_PARAMETERS_END();
-	zephir_fetch_params_without_memory_grow(1, 0, &ftdi);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
+	zephir_fetch_params(1, 1, 0, &ftdi);
 	zephir_read_property(&_0, ftdi, ZEND_STRL("handle"), PH_NOISY_CC | PH_READONLY);
 	handle = zephir_get_numberval(&_0);
+	ZEPHIR_INIT_VAR(&out);
+	ZVAL_STRING(&out, "");
 	
+            zval_ptr_dtor(&out);
+            ZVAL_EMPTY_STRING(&out);
             struct ftdi_context *_ctx = (struct ftdi_context *)(uintptr_t)handle;
             const char *_err = NULL;
             if (_ctx) {
@@ -2680,6 +3040,6 @@ PHP_METHOD(Ftdi_FTDI, ftdiGetErrorString)
             }
             ZVAL_STRING(&out, _err ? _err : "");
         
-	RETURN_CCTORW(&out);
+	RETURN_CCTOR(&out);
 }
 

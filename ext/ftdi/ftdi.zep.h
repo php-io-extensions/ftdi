@@ -43,7 +43,13 @@ PHP_METHOD(Ftdi_FTDI, ftdiSetBitmode);
 PHP_METHOD(Ftdi_FTDI, ftdiWriteDataSubmit);
 PHP_METHOD(Ftdi_FTDI, ftdiReadDataSubmit);
 PHP_METHOD(Ftdi_FTDI, ftdiTransferDataDone);
+PHP_METHOD(Ftdi_FTDI, ftdiTransferReadDone);
 PHP_METHOD(Ftdi_FTDI, ftdiTransferDataCancel);
+PHP_METHOD(Ftdi_FTDI, ftdiTransferCompleted);
+PHP_METHOD(Ftdi_FTDI, ftdiGetPollfds);
+PHP_METHOD(Ftdi_FTDI, ftdiPollfdsHandleTimeouts);
+PHP_METHOD(Ftdi_FTDI, ftdiGetNextTimeout);
+PHP_METHOD(Ftdi_FTDI, ftdiHandleEventsTimeout);
 PHP_METHOD(Ftdi_FTDI, ftdiDisableBitbang);
 PHP_METHOD(Ftdi_FTDI, ftdiReadPins);
 PHP_METHOD(Ftdi_FTDI, ftdiSetLatencyTimer);
@@ -280,9 +286,34 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftditransferdatadone, 
 	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_ftdi_ftdi_ftditransferreaddone, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftditransferdatacancel, 0, 1, IS_VOID, 0)
 
 	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftditransfercompleted, 0, 1, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftdigetpollfds, 0, 1, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftdipollfdshandletimeouts, 0, 1, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftdigetnexttimeout, 0, 1, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftdihandleeventstimeout, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, timeoutUs, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_ftdi_ftdidisablebitbang, 0, 1, IS_LONG, 0)
@@ -485,7 +516,13 @@ ZEPHIR_INIT_FUNCS(ftdi_ftdi_method_entry) {
 	PHP_ME(Ftdi_FTDI, ftdiWriteDataSubmit, arginfo_ftdi_ftdi_ftdiwritedatasubmit, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiReadDataSubmit, arginfo_ftdi_ftdi_ftdireaddatasubmit, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiTransferDataDone, arginfo_ftdi_ftdi_ftditransferdatadone, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiTransferReadDone, arginfo_ftdi_ftdi_ftditransferreaddone, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiTransferDataCancel, arginfo_ftdi_ftdi_ftditransferdatacancel, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiTransferCompleted, arginfo_ftdi_ftdi_ftditransfercompleted, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiGetPollfds, arginfo_ftdi_ftdi_ftdigetpollfds, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiPollfdsHandleTimeouts, arginfo_ftdi_ftdi_ftdipollfdshandletimeouts, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiGetNextTimeout, arginfo_ftdi_ftdi_ftdigetnexttimeout, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Ftdi_FTDI, ftdiHandleEventsTimeout, arginfo_ftdi_ftdi_ftdihandleeventstimeout, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiDisableBitbang, arginfo_ftdi_ftdi_ftdidisablebitbang, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiReadPins, arginfo_ftdi_ftdi_ftdireadpins, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Ftdi_FTDI, ftdiSetLatencyTimer, arginfo_ftdi_ftdi_ftdisetlatencytimer, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)

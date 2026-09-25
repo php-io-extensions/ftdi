@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # php-io-extensions/ftdi
 
-Cross-platform (Linux + macOS) PHP extension: Zephir static class `Ftdi\FTDI` plus opaque companion DTOs (`FTDIContext`, `FTDIEeprom`, `FTDITransferControl`, `FTDIVersionInfo`) that call **libftdi1** (with a thin EEPROM/chip-id helper in `src/ftdi-eeprom.{c,h}`). Contexts carry opaque `handle` integers — not flat POSIX FDs like posi. Windows is excluded. No FFI. Version **0.8.0** (0.8 line, paired with ext-posi 0.8.0; prior lines 0.7.0, 0.5.0).
+Cross-platform (Linux + macOS) PHP extension: Zephir static class `Ftdi\FTDI` plus opaque companion DTOs (`FTDIContext`, `FTDIEeprom`, `FTDITransferControl`, `FTDIVersionInfo`) that call **libftdi1** (with a thin EEPROM/chip-id helper in `src/ftdi-eeprom.{c,h}`). Contexts carry opaque `handle` integers — not flat POSIX FDs like posi. Windows is excluded. No FFI. Version **0.9.0** (0.9 line, paired with ext-posi 0.9.0; prior lines 0.8.0, 0.7.0, 0.5.0).
 
 **Prefer** concepts with `status: stable` when present; content is currently `draft` pending Angel’s human verification of the OKF docs (implementation facts are grounded in shipped Zephir/`src/`/`ext/` plus ScrapyardIO ecosystem **0.7.x** pages — package README is a docs pointer only).
 
@@ -21,7 +21,7 @@ Cross-platform (Linux + macOS) PHP extension: Zephir static class `Ftdi\FTDI` pl
 
 # Public PHP API
 
-* [Ftdi\\FTDI](api/ftdi.md) - Static libftdi1 bindings (lifecycle, USB, baud, I/O, bitmode, async, EEPROM, errors)
+* [Ftdi\\FTDI](api/ftdi.md) - Static libftdi1 bindings (lifecycle, USB, baud, I/O, bitmode, async, event pump, EEPROM, errors)
 * [Ftdi\\FTDIContext](api/ftdi-context.md) - Opaque context DTO + `toArray()`
 * [Ftdi\\FTDIEeprom](api/ftdi-eeprom.md) - EEPROM image DTO + `toArray()`
 * [Ftdi\\FTDITransferControl](api/ftdi-transfer-control.md) - Async transfer DTO + `toArray()`
@@ -44,9 +44,10 @@ Cross-platform (Linux + macOS) PHP extension: Zephir static class `Ftdi\FTDI` pl
 * [Windows excluded](traps/windows-excluded.md) - PIE `os-families-exclude: windows`
 * [Do not rebuild ext/ in place](traps/do-not-rebuild-in-place.md) - Copy → build → sync → delete copy
 * [No sudo pie from checkout](traps/no-sudo-pie-from-checkout.md) - Root-owned files under `ext/`
-* [IDE stub path lag](traps/ide-stub-path-lag.md) - `ide/0.2.0` lags behind 0.8.0
+* [IDE stub path lag](traps/ide-stub-path-lag.md) - Stubs at `ide/0.9.0`; regenerate only with a version bump
 * [libftdi1 required](traps/libftdi1-required.md) - Compile + runtime dependency
 * [Context free ownership](traps/context-free-ownership.md) - PHP GC does not `ftdi_free`
+* [Zephir and raw-C vars](traps/zephir-narrows-raw-c-vars.md) - A var raw C writes must be Zephir-owned and start as a string, or it narrows or leaks
 
 # Playbooks
 

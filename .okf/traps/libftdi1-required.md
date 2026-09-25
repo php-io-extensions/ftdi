@@ -5,7 +5,7 @@ description: libftdi1 is required at compile and runtime — missing pkg-config 
 resource: /README.md
 tags: [ftdi, trap, libftdi1, dependencies]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: readme
     resource: /README.md
@@ -23,7 +23,7 @@ Unlike posi (libc only), this extension **requires libftdi1** at both compile ti
 |----------|------------------|
 | Debian / Ubuntu / Raspberry Pi OS | `libftdi1-dev` (build), `libftdi1-2` (runtime) |
 | macOS | `brew install libftdi` |
-| pkg-config name | `libftdi1` |
+| pkg-config name | `libftdi1`, plus `libusb-1.0` since 0.9.0 (event-pump headers; `configure` fails without it) |
 
 Optional MPSSE workflows need a separate **mpsse** install — that is **not** a substitute for libftdi1, and it is not a PHP Composer dependency of this extension.
 

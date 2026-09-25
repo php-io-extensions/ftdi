@@ -30,6 +30,15 @@ if test "$PHP_FTDI" = "yes"; then
 		AC_MSG_ERROR(Unable to find libftdi1 installation)
 	fi
 
+	AC_MSG_CHECKING([for libusb-1.0])
+	if $PKG_CONFIG --exists libusb-1.0; then
+		AC_MSG_RESULT([found version `$PKG_CONFIG libusb-1.0 --modversion`])
+		PHP_EVAL_LIBLINE(`$PKG_CONFIG libusb-1.0 --libs`, FTDI_SHARED_LIBADD)
+		PHP_EVAL_INCLINE(`$PKG_CONFIG libusb-1.0 --cflags`)
+	else
+		AC_MSG_ERROR(Unable to find libusb-1.0 installation)
+	fi
+
 
 
 	if ! test "x" = "x"; then

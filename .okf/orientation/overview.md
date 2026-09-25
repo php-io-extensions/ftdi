@@ -5,7 +5,7 @@ description: What ftdi is, version targets, and what it deliberately is not
 resource: /composer.json
 tags: [ftdi, orientation, php-ext, libftdi1]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: composer
     resource: /composer.json
@@ -32,16 +32,16 @@ sources:
 |------|--------|
 | Package | `php-io-extensions/ftdi` |
 | Extension name | `ftdi` |
-| Version | `0.8.0` |
-| Prior release line | `0.5.0` (this cut is 0.7.x reconstitution / version alignment) |
+| Version | `0.9.0` |
+| Prior release lines | `0.8.0`, `0.7.0`, `0.5.0` |
 | PHP | `>= 8.3` (composer + README agree) |
-| Native library | **libftdi1** (compile + runtime; pkg-config `libftdi1`) |
+| Native library | **libftdi1** + **libusb-1.0** (compile + runtime; pkg-config `libftdi1`, `libusb-1.0`) |
 | OS | **Unix** — Linux + macOS; Windows excluded (`os-families-exclude`) |
 | Namespace | `Ftdi\` — `FTDI`, `FTDIContext`, `FTDIEeprom`, `FTDITransferControl`, `FTDIVersionInfo` |
 | Author | Project Saturn Studios, LLC |
 | License | MIT |
 
-Version strings are aligned at **0.8.0** in `composer.json`, `config.json`, and `PHP_FTDI_VERSION` in `ext/php_ftdi.h`.[^composer][^config][^php-h]
+Version strings are aligned at **0.9.0** in `composer.json`, `config.json`, and `PHP_FTDI_VERSION` in `ext/php_ftdi.h`.[^composer][^config][^php-h]
 
 # End capability
 
@@ -49,7 +49,7 @@ Version strings are aligned at **0.8.0** in `composer.json`, `config.json`, and 
 2. USB open/close/reset, string descriptors, device enumeration lists.
 3. UART baud / line property, read/write, flush/purge, flow control, modem lines.
 4. Bitbang / MPSSE bitmode, pin read, latency / timeouts.
-5. Asynchronous transfer submit / done / cancel.
+5. Asynchronous transfer submit / completed / done / read-done / cancel, plus the libusb event pump (pollfds, next timeout, handle events).
 6. EEPROM read/write/build/decode and chip ID.
 7. Report library version and last error string.
 
@@ -70,7 +70,7 @@ Version strings are aligned at **0.8.0** in `composer.json`, `config.json`, and 
 | `Ftdi\FTDITransferControl` | `ftdi/ftditransfercontrol.zep` | Async transfer DTO |
 | `Ftdi\FTDIVersionInfo` | `ftdi/ftdiversioninfo.zep` | Library version DTO |
 
-IDE stubs currently live under `ide/0.2.0/` — they **lag** 0.8.0 (see [IDE stub path lag](/traps/ide-stub-path-lag.md)); do not regenerate stubs as part of routine agent work.
+IDE stubs live under `ide/0.9.0/`, regenerated with the version bump (see [IDE stub path lag](/traps/ide-stub-path-lag.md)).
 
 See [Stack segmentation](/orientation/stack-segmentation.md) and [Layered stack](/architecture/stack.md).
 

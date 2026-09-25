@@ -5,7 +5,7 @@ description: Maintainer Zephir rebuild on a disposable copy — never in-place o
 resource: /install-macos.sh
 tags: [ftdi, playbook, packaging, zephir]
 status: draft
-generated: { by: okf-documentation-generator/cursor-grok-4.5, at: "2026-08-09T18:02:00Z" }
+generated: { by: cursor-agent/claude-opus-5.5, at: "2026-09-23T23:20:00Z" }
 sources:
   - id: install
     resource: /install-macos.sh
@@ -39,7 +39,7 @@ Ensure **libftdi1** is installed on the build host first.[^readme]
 
 # Steps
 
-1. Confirm version targets are **0.8.0** (or the release you intend) in `composer.json`, `config.json`, and plan the matching `PHP_FTDI_VERSION` string.[^composer][^config][^php-h]
+1. Confirm version targets are **0.9.0** (or the release you intend) in `composer.json`, `config.json`, and plan the matching `PHP_FTDI_VERSION` string.[^composer][^config][^php-h]
 
 2. Copy the package:
 
@@ -65,7 +65,10 @@ php -n -d extension=./ext/modules/ftdi.so --ri ftdi
 php -r 'use Ftdi\FTDI; $v = FTDI::ftdiGetLibraryVersion(); echo $v->versionStr, "\n";'
 ```
 
-5. Sync **only** intentional artifacts back into the primary checkout (generated `ext/` sources you mean to ship, ABI mirrors under `ext/src/`, version header). Do **not** sync phpize junk (`Makefile`, `modules/*.so`, `autom4te.cache`, …).
+5. Sync **only** intentional artifacts back into the primary checkout (generated `ext/` sources you mean to ship, ABI mirrors under `ext/src/`, version header). Do **not** sync phpize junk (`Makefile`, `modules/*.so`, `autom4te.cache`, …). Two gotchas seen on the 0.9.0 cut:
+   - `rsync` of `ext/ftdi/`, `ext/src/` or `ext/kernel/` drags in `*.lo`, `*.dep` and `.libs/`. Delete them afterwards (`find ext \( -name '*.lo' -o -name '*.o' -o -name '*.dep' \) -delete; find ext -name .libs -exec rm -rf {} +`).
+   - `zephir stubs` (which the installer runs after `pre-install.sh`) writes the stock kernel back over the `clang/kernel/` overlays. Keep the committed `ext/kernel/{file,main,require}.c`, which must match `clang/kernel/`.
+   Then check that `phpize && ./configure && make` on a throwaway copy of `ext/` builds and that `scripts/smoke.php` prints `SMOKE_OK`.
 
 6. Delete the copy:
 
@@ -79,7 +82,15 @@ rm -rf "$COPY"
 
 - Do not run zephir / phpize / make / `pie install` in the primary folder to “refresh” C.
 - Do not `sudo pie install` from the checkout (root-owned `ext/` risk).
-- Do not regenerate IDE stubs unless Angel asks (current stubs lag at `ide/0.2.0`).
+- Regenerate IDE stubs only alongside a version bump (current stubs: `ide/0.9.0`).
+
+# Shipping the tree to a Linux host
+
+macOS `tar` writes AppleDouble `._<name>.zep` entries. Zephir on Linux parses them as source and dies with `A namespace is required` (surfaced as a `CompilerException` TypeError on Zephir 0.20). Archive with:
+
+```bash
+COPYFILE_DISABLE=1 tar --exclude=.git --exclude='._*' --exclude=.DS_Store -czf /tmp/PKG.tgz PKG
+```
 
 See [Do not rebuild in place](/traps/do-not-rebuild-in-place.md).
 
