@@ -1,0 +1,1453 @@
+/* This is a generated file, edit the .stub.php file instead.
+ * Stub hash: d30da943715f262421a626c00e9001856aa051cc */
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_ftdi_new, 0, 0, Ftdi\\FTDIContext, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_init, 0, 1, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_deinit, 0, 1, IS_VOID, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_free arginfo_ftdi_deinit
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_interface, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, iface, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_ftdi_get_library_version, 0, 0, Ftdi\\FTDIVersionInfo, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_get_error_string, 0, 1, IS_STRING, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_find_all, 0, 3, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, vendor, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, product, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_get_strings, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_OBJ_INFO(0, dev, Ftdi\\FTDIDevice, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_usb_get_strings2 arginfo_ftdi_usb_get_strings
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open_dev, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_OBJ_INFO(0, dev, Ftdi\\FTDIDevice, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, vendor, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, product, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open_desc, 0, 5, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, vendor, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, product, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, description, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, serial, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open_desc_index, 0, 6, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, vendor, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, product, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, description, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, serial, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, index, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open_bus_addr, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, bus, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, addr, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_usb_open_string, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, description, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_usb_close arginfo_ftdi_init
+
+#define arginfo_ftdi_usb_reset arginfo_ftdi_init
+
+#define arginfo_ftdi_tci_flush arginfo_ftdi_init
+
+#define arginfo_ftdi_tco_flush arginfo_ftdi_init
+
+#define arginfo_ftdi_tcio_flush arginfo_ftdi_init
+
+#define arginfo_ftdi_usb_purge_rx_buffer arginfo_ftdi_init
+
+#define arginfo_ftdi_usb_purge_tx_buffer arginfo_ftdi_init
+
+#define arginfo_ftdi_usb_purge_buffers arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_convert_baudrate_ut_export, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_TYPE_INFO(0, baudrate, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_baudrate, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, baudrate, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_line_property, 0, 4, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, bits, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, sbit, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, parity, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_line_property2, 0, 5, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, bits, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, sbit, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, parity, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, breakType, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_bitmode, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, bitmask, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, mode, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_disable_bitbang arginfo_ftdi_init
+
+#define arginfo_ftdi_read_pins arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_latency_timer, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, latency, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_get_latency_timer arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_timeouts, 0, 3, IS_VOID, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, readTimeout, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, writeTimeout, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_poll_modem_status arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_setflowctrl, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, flowctrl, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_setflowctrl_xonxoff, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, xon, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, xoff, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_setdtr, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, state, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_setrts arginfo_ftdi_setdtr
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_setdtr_rts, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, dtr, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, rts, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_event_char, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, eventch, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, enable, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_error_char, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, errorch, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, enable, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_write_data, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, data, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, size, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_ftdi_read_data, 0, 2, MAY_BE_STRING|MAY_BE_FALSE)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, size, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_write_data_set_chunksize, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, chunksize, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_write_data_get_chunksize arginfo_ftdi_init
+
+#define arginfo_ftdi_read_data_set_chunksize arginfo_ftdi_write_data_set_chunksize
+
+#define arginfo_ftdi_read_data_get_chunksize arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_ftdi_write_data_submit, 0, 3, Ftdi\\FTDITransferControl, 1)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, data, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, size, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_ftdi_read_data_submit, 0, 2, Ftdi\\FTDITransferControl, 1)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, size, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_transfer_data_done, 0, 1, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_ftdi_transfer_read_done, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
+	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_transfer_data_cancel, 0, 1, IS_VOID, 0)
+	ZEND_ARG_OBJ_INFO(0, tc, Ftdi\\FTDITransferControl, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_transfer_completed arginfo_ftdi_transfer_data_done
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_get_pollfds, 0, 1, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_pollfds_handle_timeouts arginfo_ftdi_init
+
+#define arginfo_ftdi_get_next_timeout arginfo_ftdi_get_pollfds
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_handle_events_timeout, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, timeout_us, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_ftdi_get_eeprom, 0, 1, Ftdi\\FTDIEeprom, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_eeprom_initdefaults, 0, 4, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, manufacturer, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, product, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, serial, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_eeprom_set_strings arginfo_ftdi_eeprom_initdefaults
+
+#define arginfo_ftdi_eeprom_get_strings arginfo_ftdi_get_pollfds
+
+#define arginfo_ftdi_eeprom_build arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_eeprom_decode, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, verbose, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_get_eeprom_value, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, valueName, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_eeprom_value, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, valueName, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, value, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_get_eeprom_buf arginfo_ftdi_read_data
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_set_eeprom_buf, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, buf, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_set_eeprom_user_data arginfo_ftdi_set_eeprom_buf
+
+#define arginfo_ftdi_set_ft232h_cbus arginfo_ftdi_get_error_string
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_read_eeprom_location, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, addr, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_read_eeprom arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_read_chip_id, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(1, chip_id, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ftdi_write_eeprom_location, 0, 3, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, ftdi, Ftdi\\FTDIContext, 0)
+	ZEND_ARG_TYPE_INFO(0, addr, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, val, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_ftdi_write_eeprom arginfo_ftdi_init
+
+#define arginfo_ftdi_erase_eeprom arginfo_ftdi_init
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Ftdi_FTDIContext___construct, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Ftdi_FTDIContext_toArray, 0, 0, IS_ARRAY, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_class_Ftdi_FTDIDevice___construct arginfo_class_Ftdi_FTDIContext___construct
+
+#define arginfo_class_Ftdi_FTDITransferControl___construct arginfo_class_Ftdi_FTDIContext___construct
+
+#define arginfo_class_Ftdi_FTDITransferControl_toArray arginfo_class_Ftdi_FTDIContext_toArray
+
+#define arginfo_class_Ftdi_FTDIVersionInfo_toArray arginfo_class_Ftdi_FTDIContext_toArray
+
+#define arginfo_class_Ftdi_FTDIEeprom_toArray arginfo_class_Ftdi_FTDIContext_toArray
+
+ZEND_FUNCTION(ftdi_new);
+ZEND_FUNCTION(ftdi_init);
+ZEND_FUNCTION(ftdi_deinit);
+ZEND_FUNCTION(ftdi_free);
+ZEND_FUNCTION(ftdi_set_interface);
+ZEND_FUNCTION(ftdi_get_library_version);
+ZEND_FUNCTION(ftdi_get_error_string);
+ZEND_FUNCTION(ftdi_usb_find_all);
+ZEND_FUNCTION(ftdi_usb_get_strings);
+ZEND_FUNCTION(ftdi_usb_get_strings2);
+ZEND_FUNCTION(ftdi_usb_open_dev);
+ZEND_FUNCTION(ftdi_usb_open);
+ZEND_FUNCTION(ftdi_usb_open_desc);
+ZEND_FUNCTION(ftdi_usb_open_desc_index);
+ZEND_FUNCTION(ftdi_usb_open_bus_addr);
+ZEND_FUNCTION(ftdi_usb_open_string);
+ZEND_FUNCTION(ftdi_usb_close);
+ZEND_FUNCTION(ftdi_usb_reset);
+ZEND_FUNCTION(ftdi_tci_flush);
+ZEND_FUNCTION(ftdi_tco_flush);
+ZEND_FUNCTION(ftdi_tcio_flush);
+ZEND_FUNCTION(ftdi_usb_purge_rx_buffer);
+ZEND_FUNCTION(ftdi_usb_purge_tx_buffer);
+ZEND_FUNCTION(ftdi_usb_purge_buffers);
+ZEND_FUNCTION(ftdi_convert_baudrate_ut_export);
+ZEND_FUNCTION(ftdi_set_baudrate);
+ZEND_FUNCTION(ftdi_set_line_property);
+ZEND_FUNCTION(ftdi_set_line_property2);
+ZEND_FUNCTION(ftdi_set_bitmode);
+ZEND_FUNCTION(ftdi_disable_bitbang);
+ZEND_FUNCTION(ftdi_read_pins);
+ZEND_FUNCTION(ftdi_set_latency_timer);
+ZEND_FUNCTION(ftdi_get_latency_timer);
+ZEND_FUNCTION(ftdi_set_timeouts);
+ZEND_FUNCTION(ftdi_poll_modem_status);
+ZEND_FUNCTION(ftdi_setflowctrl);
+ZEND_FUNCTION(ftdi_setflowctrl_xonxoff);
+ZEND_FUNCTION(ftdi_setdtr);
+ZEND_FUNCTION(ftdi_setrts);
+ZEND_FUNCTION(ftdi_setdtr_rts);
+ZEND_FUNCTION(ftdi_set_event_char);
+ZEND_FUNCTION(ftdi_set_error_char);
+ZEND_FUNCTION(ftdi_write_data);
+ZEND_FUNCTION(ftdi_read_data);
+ZEND_FUNCTION(ftdi_write_data_set_chunksize);
+ZEND_FUNCTION(ftdi_write_data_get_chunksize);
+ZEND_FUNCTION(ftdi_read_data_set_chunksize);
+ZEND_FUNCTION(ftdi_read_data_get_chunksize);
+ZEND_FUNCTION(ftdi_write_data_submit);
+ZEND_FUNCTION(ftdi_read_data_submit);
+ZEND_FUNCTION(ftdi_transfer_data_done);
+ZEND_FUNCTION(ftdi_transfer_read_done);
+ZEND_FUNCTION(ftdi_transfer_data_cancel);
+ZEND_FUNCTION(ftdi_transfer_completed);
+ZEND_FUNCTION(ftdi_get_pollfds);
+ZEND_FUNCTION(ftdi_pollfds_handle_timeouts);
+ZEND_FUNCTION(ftdi_get_next_timeout);
+ZEND_FUNCTION(ftdi_handle_events_timeout);
+ZEND_FUNCTION(ftdi_get_eeprom);
+ZEND_FUNCTION(ftdi_eeprom_initdefaults);
+ZEND_FUNCTION(ftdi_eeprom_set_strings);
+ZEND_FUNCTION(ftdi_eeprom_get_strings);
+ZEND_FUNCTION(ftdi_eeprom_build);
+ZEND_FUNCTION(ftdi_eeprom_decode);
+ZEND_FUNCTION(ftdi_get_eeprom_value);
+ZEND_FUNCTION(ftdi_set_eeprom_value);
+ZEND_FUNCTION(ftdi_get_eeprom_buf);
+ZEND_FUNCTION(ftdi_set_eeprom_buf);
+ZEND_FUNCTION(ftdi_set_eeprom_user_data);
+ZEND_FUNCTION(ftdi_set_ft232h_cbus);
+ZEND_FUNCTION(ftdi_read_eeprom_location);
+ZEND_FUNCTION(ftdi_read_eeprom);
+ZEND_FUNCTION(ftdi_read_chip_id);
+ZEND_FUNCTION(ftdi_write_eeprom_location);
+ZEND_FUNCTION(ftdi_write_eeprom);
+ZEND_FUNCTION(ftdi_erase_eeprom);
+ZEND_METHOD(Ftdi_FTDIContext, __construct);
+ZEND_METHOD(Ftdi_FTDIContext, toArray);
+ZEND_METHOD(Ftdi_FTDIDevice, __construct);
+ZEND_METHOD(Ftdi_FTDITransferControl, __construct);
+ZEND_METHOD(Ftdi_FTDITransferControl, toArray);
+ZEND_METHOD(Ftdi_FTDIVersionInfo, toArray);
+ZEND_METHOD(Ftdi_FTDIEeprom, toArray);
+
+static const zend_function_entry ext_functions[] = {
+	ZEND_FE(ftdi_new, arginfo_ftdi_new)
+	ZEND_FE(ftdi_init, arginfo_ftdi_init)
+	ZEND_FE(ftdi_deinit, arginfo_ftdi_deinit)
+	ZEND_FE(ftdi_free, arginfo_ftdi_free)
+	ZEND_FE(ftdi_set_interface, arginfo_ftdi_set_interface)
+	ZEND_FE(ftdi_get_library_version, arginfo_ftdi_get_library_version)
+	ZEND_FE(ftdi_get_error_string, arginfo_ftdi_get_error_string)
+	ZEND_FE(ftdi_usb_find_all, arginfo_ftdi_usb_find_all)
+	ZEND_FE(ftdi_usb_get_strings, arginfo_ftdi_usb_get_strings)
+	ZEND_FE(ftdi_usb_get_strings2, arginfo_ftdi_usb_get_strings2)
+	ZEND_FE(ftdi_usb_open_dev, arginfo_ftdi_usb_open_dev)
+	ZEND_FE(ftdi_usb_open, arginfo_ftdi_usb_open)
+	ZEND_FE(ftdi_usb_open_desc, arginfo_ftdi_usb_open_desc)
+	ZEND_FE(ftdi_usb_open_desc_index, arginfo_ftdi_usb_open_desc_index)
+	ZEND_FE(ftdi_usb_open_bus_addr, arginfo_ftdi_usb_open_bus_addr)
+	ZEND_FE(ftdi_usb_open_string, arginfo_ftdi_usb_open_string)
+	ZEND_FE(ftdi_usb_close, arginfo_ftdi_usb_close)
+	ZEND_FE(ftdi_usb_reset, arginfo_ftdi_usb_reset)
+	ZEND_FE(ftdi_tci_flush, arginfo_ftdi_tci_flush)
+	ZEND_FE(ftdi_tco_flush, arginfo_ftdi_tco_flush)
+	ZEND_FE(ftdi_tcio_flush, arginfo_ftdi_tcio_flush)
+	ZEND_FE(ftdi_usb_purge_rx_buffer, arginfo_ftdi_usb_purge_rx_buffer)
+	ZEND_FE(ftdi_usb_purge_tx_buffer, arginfo_ftdi_usb_purge_tx_buffer)
+	ZEND_FE(ftdi_usb_purge_buffers, arginfo_ftdi_usb_purge_buffers)
+	ZEND_FE(ftdi_convert_baudrate_ut_export, arginfo_ftdi_convert_baudrate_ut_export)
+	ZEND_FE(ftdi_set_baudrate, arginfo_ftdi_set_baudrate)
+	ZEND_FE(ftdi_set_line_property, arginfo_ftdi_set_line_property)
+	ZEND_FE(ftdi_set_line_property2, arginfo_ftdi_set_line_property2)
+	ZEND_FE(ftdi_set_bitmode, arginfo_ftdi_set_bitmode)
+	ZEND_FE(ftdi_disable_bitbang, arginfo_ftdi_disable_bitbang)
+	ZEND_FE(ftdi_read_pins, arginfo_ftdi_read_pins)
+	ZEND_FE(ftdi_set_latency_timer, arginfo_ftdi_set_latency_timer)
+	ZEND_FE(ftdi_get_latency_timer, arginfo_ftdi_get_latency_timer)
+	ZEND_FE(ftdi_set_timeouts, arginfo_ftdi_set_timeouts)
+	ZEND_FE(ftdi_poll_modem_status, arginfo_ftdi_poll_modem_status)
+	ZEND_FE(ftdi_setflowctrl, arginfo_ftdi_setflowctrl)
+	ZEND_FE(ftdi_setflowctrl_xonxoff, arginfo_ftdi_setflowctrl_xonxoff)
+	ZEND_FE(ftdi_setdtr, arginfo_ftdi_setdtr)
+	ZEND_FE(ftdi_setrts, arginfo_ftdi_setrts)
+	ZEND_FE(ftdi_setdtr_rts, arginfo_ftdi_setdtr_rts)
+	ZEND_FE(ftdi_set_event_char, arginfo_ftdi_set_event_char)
+	ZEND_FE(ftdi_set_error_char, arginfo_ftdi_set_error_char)
+	ZEND_FE(ftdi_write_data, arginfo_ftdi_write_data)
+	ZEND_FE(ftdi_read_data, arginfo_ftdi_read_data)
+	ZEND_FE(ftdi_write_data_set_chunksize, arginfo_ftdi_write_data_set_chunksize)
+	ZEND_FE(ftdi_write_data_get_chunksize, arginfo_ftdi_write_data_get_chunksize)
+	ZEND_FE(ftdi_read_data_set_chunksize, arginfo_ftdi_read_data_set_chunksize)
+	ZEND_FE(ftdi_read_data_get_chunksize, arginfo_ftdi_read_data_get_chunksize)
+	ZEND_FE(ftdi_write_data_submit, arginfo_ftdi_write_data_submit)
+	ZEND_FE(ftdi_read_data_submit, arginfo_ftdi_read_data_submit)
+	ZEND_FE(ftdi_transfer_data_done, arginfo_ftdi_transfer_data_done)
+	ZEND_FE(ftdi_transfer_read_done, arginfo_ftdi_transfer_read_done)
+	ZEND_FE(ftdi_transfer_data_cancel, arginfo_ftdi_transfer_data_cancel)
+	ZEND_FE(ftdi_transfer_completed, arginfo_ftdi_transfer_completed)
+	ZEND_FE(ftdi_get_pollfds, arginfo_ftdi_get_pollfds)
+	ZEND_FE(ftdi_pollfds_handle_timeouts, arginfo_ftdi_pollfds_handle_timeouts)
+	ZEND_FE(ftdi_get_next_timeout, arginfo_ftdi_get_next_timeout)
+	ZEND_FE(ftdi_handle_events_timeout, arginfo_ftdi_handle_events_timeout)
+	ZEND_FE(ftdi_get_eeprom, arginfo_ftdi_get_eeprom)
+	ZEND_FE(ftdi_eeprom_initdefaults, arginfo_ftdi_eeprom_initdefaults)
+	ZEND_FE(ftdi_eeprom_set_strings, arginfo_ftdi_eeprom_set_strings)
+	ZEND_FE(ftdi_eeprom_get_strings, arginfo_ftdi_eeprom_get_strings)
+	ZEND_FE(ftdi_eeprom_build, arginfo_ftdi_eeprom_build)
+	ZEND_FE(ftdi_eeprom_decode, arginfo_ftdi_eeprom_decode)
+	ZEND_FE(ftdi_get_eeprom_value, arginfo_ftdi_get_eeprom_value)
+	ZEND_FE(ftdi_set_eeprom_value, arginfo_ftdi_set_eeprom_value)
+	ZEND_FE(ftdi_get_eeprom_buf, arginfo_ftdi_get_eeprom_buf)
+	ZEND_FE(ftdi_set_eeprom_buf, arginfo_ftdi_set_eeprom_buf)
+	ZEND_FE(ftdi_set_eeprom_user_data, arginfo_ftdi_set_eeprom_user_data)
+	ZEND_FE(ftdi_set_ft232h_cbus, arginfo_ftdi_set_ft232h_cbus)
+	ZEND_FE(ftdi_read_eeprom_location, arginfo_ftdi_read_eeprom_location)
+	ZEND_FE(ftdi_read_eeprom, arginfo_ftdi_read_eeprom)
+	ZEND_FE(ftdi_read_chip_id, arginfo_ftdi_read_chip_id)
+	ZEND_FE(ftdi_write_eeprom_location, arginfo_ftdi_write_eeprom_location)
+	ZEND_FE(ftdi_write_eeprom, arginfo_ftdi_write_eeprom)
+	ZEND_FE(ftdi_erase_eeprom, arginfo_ftdi_erase_eeprom)
+	ZEND_FE_END
+};
+
+static const zend_function_entry class_Ftdi_FTDIContext_methods[] = {
+	ZEND_ME(Ftdi_FTDIContext, __construct, arginfo_class_Ftdi_FTDIContext___construct, ZEND_ACC_PRIVATE)
+	ZEND_ME(Ftdi_FTDIContext, toArray, arginfo_class_Ftdi_FTDIContext_toArray, ZEND_ACC_PUBLIC)
+	ZEND_FE_END
+};
+
+static const zend_function_entry class_Ftdi_FTDIDevice_methods[] = {
+	ZEND_ME(Ftdi_FTDIDevice, __construct, arginfo_class_Ftdi_FTDIDevice___construct, ZEND_ACC_PRIVATE)
+	ZEND_FE_END
+};
+
+static const zend_function_entry class_Ftdi_FTDITransferControl_methods[] = {
+	ZEND_ME(Ftdi_FTDITransferControl, __construct, arginfo_class_Ftdi_FTDITransferControl___construct, ZEND_ACC_PRIVATE)
+	ZEND_ME(Ftdi_FTDITransferControl, toArray, arginfo_class_Ftdi_FTDITransferControl_toArray, ZEND_ACC_PUBLIC)
+	ZEND_FE_END
+};
+
+static const zend_function_entry class_Ftdi_FTDIVersionInfo_methods[] = {
+	ZEND_ME(Ftdi_FTDIVersionInfo, toArray, arginfo_class_Ftdi_FTDIVersionInfo_toArray, ZEND_ACC_PUBLIC)
+	ZEND_FE_END
+};
+
+static const zend_function_entry class_Ftdi_FTDIEeprom_methods[] = {
+	ZEND_ME(Ftdi_FTDIEeprom, toArray, arginfo_class_Ftdi_FTDIEeprom_toArray, ZEND_ACC_PUBLIC)
+	ZEND_FE_END
+};
+
+static void register_ftdi_symbols(int module_number)
+{
+	REGISTER_LONG_CONSTANT("TYPE_AM", TYPE_AM, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_BM", TYPE_BM, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_2232C", TYPE_2232C, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_R", TYPE_R, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_2232H", TYPE_2232H, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_4232H", TYPE_4232H, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_232H", TYPE_232H, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("TYPE_230X", TYPE_230X, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("NONE", NONE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("ODD", ODD, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("EVEN", EVEN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("MARK", MARK, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SPACE", SPACE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("STOP_BIT_1", STOP_BIT_1, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("STOP_BIT_15", STOP_BIT_15, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("STOP_BIT_2", STOP_BIT_2, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITS_7", BITS_7, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITS_8", BITS_8, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BREAK_OFF", BREAK_OFF, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BREAK_ON", BREAK_ON, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_RESET", BITMODE_RESET, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_BITBANG", BITMODE_BITBANG, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_MPSSE", BITMODE_MPSSE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_SYNCBB", BITMODE_SYNCBB, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_MCU", BITMODE_MCU, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_OPTO", BITMODE_OPTO, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_CBUS", BITMODE_CBUS, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_SYNCFF", BITMODE_SYNCFF, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("BITMODE_FT1284", BITMODE_FT1284, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INTERFACE_ANY", INTERFACE_ANY, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INTERFACE_A", INTERFACE_A, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INTERFACE_B", INTERFACE_B, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INTERFACE_C", INTERFACE_C, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INTERFACE_D", INTERFACE_D, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("AUTO_DETACH_SIO_MODULE", AUTO_DETACH_SIO_MODULE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("DONT_DETACH_SIO_MODULE", DONT_DETACH_SIO_MODULE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("AUTO_DETACH_REATACH_SIO_MODULE", AUTO_DETACH_REATACH_SIO_MODULE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("VENDOR_ID", VENDOR_ID, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PRODUCT_ID", PRODUCT_ID, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SELF_POWERED", SELF_POWERED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("REMOTE_WAKEUP", REMOTE_WAKEUP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IS_NOT_PNP", IS_NOT_PNP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SUSPEND_DBUS7", SUSPEND_DBUS7, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IN_IS_ISOCHRONOUS", IN_IS_ISOCHRONOUS, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("OUT_IS_ISOCHRONOUS", OUT_IS_ISOCHRONOUS, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SUSPEND_PULL_DOWNS", SUSPEND_PULL_DOWNS, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("USE_SERIAL", USE_SERIAL, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("USB_VERSION", USB_VERSION, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("USE_USB_VERSION", USE_USB_VERSION, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("MAX_POWER", MAX_POWER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_A_TYPE", CHANNEL_A_TYPE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_B_TYPE", CHANNEL_B_TYPE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_A_DRIVER", CHANNEL_A_DRIVER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_B_DRIVER", CHANNEL_B_DRIVER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_0", CBUS_FUNCTION_0, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_1", CBUS_FUNCTION_1, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_2", CBUS_FUNCTION_2, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_3", CBUS_FUNCTION_3, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_4", CBUS_FUNCTION_4, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_5", CBUS_FUNCTION_5, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_6", CBUS_FUNCTION_6, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_7", CBUS_FUNCTION_7, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_8", CBUS_FUNCTION_8, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_FUNCTION_9", CBUS_FUNCTION_9, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("HIGH_CURRENT", HIGH_CURRENT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("HIGH_CURRENT_A", HIGH_CURRENT_A, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("HIGH_CURRENT_B", HIGH_CURRENT_B, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INVERT", INVERT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP0_DRIVE", GROUP0_DRIVE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP0_SCHMITT", GROUP0_SCHMITT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP0_SLEW", GROUP0_SLEW, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP1_DRIVE", GROUP1_DRIVE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP1_SCHMITT", GROUP1_SCHMITT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP1_SLEW", GROUP1_SLEW, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP2_DRIVE", GROUP2_DRIVE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP2_SCHMITT", GROUP2_SCHMITT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP2_SLEW", GROUP2_SLEW, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP3_DRIVE", GROUP3_DRIVE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP3_SCHMITT", GROUP3_SCHMITT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GROUP3_SLEW", GROUP3_SLEW, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHIP_SIZE", CHIP_SIZE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHIP_TYPE", CHIP_TYPE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("POWER_SAVE", POWER_SAVE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CLOCK_POLARITY", CLOCK_POLARITY, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("DATA_ORDER", DATA_ORDER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FLOW_CONTROL", FLOW_CONTROL, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_C_DRIVER", CHANNEL_C_DRIVER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_D_DRIVER", CHANNEL_D_DRIVER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_A_RS485", CHANNEL_A_RS485, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_B_RS485", CHANNEL_B_RS485, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_C_RS485", CHANNEL_C_RS485, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CHANNEL_D_RS485", CHANNEL_D_RS485, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("RELEASE_NUMBER", RELEASE_NUMBER, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("EXTERNAL_OSCILLATOR", EXTERNAL_OSCILLATOR, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("USER_DATA_ADDR", USER_DATA_ADDR, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_TXDEN", CBUS_TXDEN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_PWREN", CBUS_PWREN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_RXLED", CBUS_RXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_TXLED", CBUS_TXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_TXRXLED", CBUS_TXRXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_SLEEP", CBUS_SLEEP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_CLK48", CBUS_CLK48, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_CLK24", CBUS_CLK24, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_CLK12", CBUS_CLK12, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_CLK6", CBUS_CLK6, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_IOMODE", CBUS_IOMODE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_BB_WR", CBUS_BB_WR, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUS_BB_RD", CBUS_BB_RD, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_TRISTATE", CBUSH_TRISTATE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_TXLED", CBUSH_TXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_RXLED", CBUSH_RXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_TXRXLED", CBUSH_TXRXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_PWREN", CBUSH_PWREN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_SLEEP", CBUSH_SLEEP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_DRIVE_0", CBUSH_DRIVE_0, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_DRIVE1", CBUSH_DRIVE1, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_IOMODE", CBUSH_IOMODE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_TXDEN", CBUSH_TXDEN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_CLK30", CBUSH_CLK30, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_CLK15", CBUSH_CLK15, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSH_CLK7_5", CBUSH_CLK7_5, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_TRISTATE", CBUSX_TRISTATE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_TXLED", CBUSX_TXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_RXLED", CBUSX_RXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_TXRXLED", CBUSX_TXRXLED, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_PWREN", CBUSX_PWREN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_SLEEP", CBUSX_SLEEP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_DRIVE_0", CBUSX_DRIVE_0, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_DRIVE1", CBUSX_DRIVE1, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_IOMODE", CBUSX_IOMODE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_TXDEN", CBUSX_TXDEN, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_CLK24", CBUSX_CLK24, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_CLK12", CBUSX_CLK12, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_CLK6", CBUSX_CLK6, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_BAT_DETECT", CBUSX_BAT_DETECT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_BAT_DETECT_NEG", CBUSX_BAT_DETECT_NEG, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_I2C_TXE", CBUSX_I2C_TXE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_I2C_RXF", CBUSX_I2C_RXF, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_VBUS_SENSE", CBUSX_VBUS_SENSE, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_BB_WR", CBUSX_BB_WR, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_BB_RD", CBUSX_BB_RD, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_TIME_STAMP", CBUSX_TIME_STAMP, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("CBUSX_AWAKE", CBUSX_AWAKE, CONST_PERSISTENT);
+#if defined(MPSSE_WRITE_NEG)
+	REGISTER_LONG_CONSTANT("MPSSE_WRITE_NEG", MPSSE_WRITE_NEG, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_BITMODE)
+	REGISTER_LONG_CONSTANT("MPSSE_BITMODE", MPSSE_BITMODE, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_READ_NEG)
+	REGISTER_LONG_CONSTANT("MPSSE_READ_NEG", MPSSE_READ_NEG, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_LSB)
+	REGISTER_LONG_CONSTANT("MPSSE_LSB", MPSSE_LSB, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_DO_WRITE)
+	REGISTER_LONG_CONSTANT("MPSSE_DO_WRITE", MPSSE_DO_WRITE, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_DO_READ)
+	REGISTER_LONG_CONSTANT("MPSSE_DO_READ", MPSSE_DO_READ, CONST_PERSISTENT);
+#endif
+#if defined(MPSSE_WRITE_TMS)
+	REGISTER_LONG_CONSTANT("MPSSE_WRITE_TMS", MPSSE_WRITE_TMS, CONST_PERSISTENT);
+#endif
+#if defined(SET_BITS_LOW)
+	REGISTER_LONG_CONSTANT("SET_BITS_LOW", SET_BITS_LOW, CONST_PERSISTENT);
+#endif
+#if defined(SET_BITS_HIGH)
+	REGISTER_LONG_CONSTANT("SET_BITS_HIGH", SET_BITS_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(GET_BITS_LOW)
+	REGISTER_LONG_CONSTANT("GET_BITS_LOW", GET_BITS_LOW, CONST_PERSISTENT);
+#endif
+#if defined(GET_BITS_HIGH)
+	REGISTER_LONG_CONSTANT("GET_BITS_HIGH", GET_BITS_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(LOOPBACK_START)
+	REGISTER_LONG_CONSTANT("LOOPBACK_START", LOOPBACK_START, CONST_PERSISTENT);
+#endif
+#if defined(LOOPBACK_END)
+	REGISTER_LONG_CONSTANT("LOOPBACK_END", LOOPBACK_END, CONST_PERSISTENT);
+#endif
+#if defined(TCK_DIVISOR)
+	REGISTER_LONG_CONSTANT("TCK_DIVISOR", TCK_DIVISOR, CONST_PERSISTENT);
+#endif
+#if defined(DIS_DIV_5)
+	REGISTER_LONG_CONSTANT("DIS_DIV_5", DIS_DIV_5, CONST_PERSISTENT);
+#endif
+#if defined(EN_DIV_5)
+	REGISTER_LONG_CONSTANT("EN_DIV_5", EN_DIV_5, CONST_PERSISTENT);
+#endif
+#if defined(EN_3_PHASE)
+	REGISTER_LONG_CONSTANT("EN_3_PHASE", EN_3_PHASE, CONST_PERSISTENT);
+#endif
+#if defined(DIS_3_PHASE)
+	REGISTER_LONG_CONSTANT("DIS_3_PHASE", DIS_3_PHASE, CONST_PERSISTENT);
+#endif
+#if defined(CLK_BITS)
+	REGISTER_LONG_CONSTANT("CLK_BITS", CLK_BITS, CONST_PERSISTENT);
+#endif
+#if defined(CLK_BYTES)
+	REGISTER_LONG_CONSTANT("CLK_BYTES", CLK_BYTES, CONST_PERSISTENT);
+#endif
+#if defined(CLK_WAIT_HIGH)
+	REGISTER_LONG_CONSTANT("CLK_WAIT_HIGH", CLK_WAIT_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(CLK_WAIT_LOW)
+	REGISTER_LONG_CONSTANT("CLK_WAIT_LOW", CLK_WAIT_LOW, CONST_PERSISTENT);
+#endif
+#if defined(EN_ADAPTIVE)
+	REGISTER_LONG_CONSTANT("EN_ADAPTIVE", EN_ADAPTIVE, CONST_PERSISTENT);
+#endif
+#if defined(DIS_ADAPTIVE)
+	REGISTER_LONG_CONSTANT("DIS_ADAPTIVE", DIS_ADAPTIVE, CONST_PERSISTENT);
+#endif
+#if defined(CLK_BYTES_OR_HIGH)
+	REGISTER_LONG_CONSTANT("CLK_BYTES_OR_HIGH", CLK_BYTES_OR_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(CLK_BYTES_OR_LOW)
+	REGISTER_LONG_CONSTANT("CLK_BYTES_OR_LOW", CLK_BYTES_OR_LOW, CONST_PERSISTENT);
+#endif
+#if defined(DRIVE_OPEN_COLLECTOR)
+	REGISTER_LONG_CONSTANT("DRIVE_OPEN_COLLECTOR", DRIVE_OPEN_COLLECTOR, CONST_PERSISTENT);
+#endif
+#if defined(SEND_IMMEDIATE)
+	REGISTER_LONG_CONSTANT("SEND_IMMEDIATE", SEND_IMMEDIATE, CONST_PERSISTENT);
+#endif
+#if defined(WAIT_ON_HIGH)
+	REGISTER_LONG_CONSTANT("WAIT_ON_HIGH", WAIT_ON_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(WAIT_ON_LOW)
+	REGISTER_LONG_CONSTANT("WAIT_ON_LOW", WAIT_ON_LOW, CONST_PERSISTENT);
+#endif
+#if defined(READ_SHORT)
+	REGISTER_LONG_CONSTANT("READ_SHORT", READ_SHORT, CONST_PERSISTENT);
+#endif
+#if defined(READ_EXTENDED)
+	REGISTER_LONG_CONSTANT("READ_EXTENDED", READ_EXTENDED, CONST_PERSISTENT);
+#endif
+#if defined(WRITE_SHORT)
+	REGISTER_LONG_CONSTANT("WRITE_SHORT", WRITE_SHORT, CONST_PERSISTENT);
+#endif
+#if defined(WRITE_EXTENDED)
+	REGISTER_LONG_CONSTANT("WRITE_EXTENDED", WRITE_EXTENDED, CONST_PERSISTENT);
+#endif
+#if defined(SIO_RESET)
+	REGISTER_LONG_CONSTANT("SIO_RESET", SIO_RESET, CONST_PERSISTENT);
+#endif
+#if defined(SIO_MODEM_CTRL)
+	REGISTER_LONG_CONSTANT("SIO_MODEM_CTRL", SIO_MODEM_CTRL, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_FLOW_CTRL)
+	REGISTER_LONG_CONSTANT("SIO_SET_FLOW_CTRL", SIO_SET_FLOW_CTRL, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_BAUD_RATE)
+	REGISTER_LONG_CONSTANT("SIO_SET_BAUD_RATE", SIO_SET_BAUD_RATE, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_DATA)
+	REGISTER_LONG_CONSTANT("SIO_SET_DATA", SIO_SET_DATA, CONST_PERSISTENT);
+#endif
+#if defined(FTDI_DEVICE_OUT_REQTYPE)
+	REGISTER_LONG_CONSTANT("FTDI_DEVICE_OUT_REQTYPE", FTDI_DEVICE_OUT_REQTYPE, CONST_PERSISTENT);
+#endif
+#if defined(FTDI_DEVICE_IN_REQTYPE)
+	REGISTER_LONG_CONSTANT("FTDI_DEVICE_IN_REQTYPE", FTDI_DEVICE_IN_REQTYPE, CONST_PERSISTENT);
+#endif
+#if defined(SIO_RESET_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_RESET_REQUEST", SIO_RESET_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_BAUDRATE_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_BAUDRATE_REQUEST", SIO_SET_BAUDRATE_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_DATA_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_DATA_REQUEST", SIO_SET_DATA_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_FLOW_CTRL_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_FLOW_CTRL_REQUEST", SIO_SET_FLOW_CTRL_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_MODEM_CTRL_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_MODEM_CTRL_REQUEST", SIO_SET_MODEM_CTRL_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_POLL_MODEM_STATUS_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_POLL_MODEM_STATUS_REQUEST", SIO_POLL_MODEM_STATUS_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_EVENT_CHAR_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_EVENT_CHAR_REQUEST", SIO_SET_EVENT_CHAR_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_ERROR_CHAR_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_ERROR_CHAR_REQUEST", SIO_SET_ERROR_CHAR_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_LATENCY_TIMER_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_LATENCY_TIMER_REQUEST", SIO_SET_LATENCY_TIMER_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_GET_LATENCY_TIMER_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_GET_LATENCY_TIMER_REQUEST", SIO_GET_LATENCY_TIMER_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_BITMODE_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_SET_BITMODE_REQUEST", SIO_SET_BITMODE_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_READ_PINS_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_READ_PINS_REQUEST", SIO_READ_PINS_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_READ_EEPROM_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_READ_EEPROM_REQUEST", SIO_READ_EEPROM_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_WRITE_EEPROM_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_WRITE_EEPROM_REQUEST", SIO_WRITE_EEPROM_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_ERASE_EEPROM_REQUEST)
+	REGISTER_LONG_CONSTANT("SIO_ERASE_EEPROM_REQUEST", SIO_ERASE_EEPROM_REQUEST, CONST_PERSISTENT);
+#endif
+#if defined(SIO_RESET_SIO)
+	REGISTER_LONG_CONSTANT("SIO_RESET_SIO", SIO_RESET_SIO, CONST_PERSISTENT);
+#endif
+#if defined(SIO_TCIFLUSH)
+	REGISTER_LONG_CONSTANT("SIO_TCIFLUSH", SIO_TCIFLUSH, CONST_PERSISTENT);
+#endif
+#if defined(SIO_TCOFLUSH)
+	REGISTER_LONG_CONSTANT("SIO_TCOFLUSH", SIO_TCOFLUSH, CONST_PERSISTENT);
+#endif
+#if defined(SIO_DISABLE_FLOW_CTRL)
+	REGISTER_LONG_CONSTANT("SIO_DISABLE_FLOW_CTRL", SIO_DISABLE_FLOW_CTRL, CONST_PERSISTENT);
+#endif
+#if defined(SIO_RTS_CTS_HS)
+	REGISTER_LONG_CONSTANT("SIO_RTS_CTS_HS", SIO_RTS_CTS_HS, CONST_PERSISTENT);
+#endif
+#if defined(SIO_DTR_DSR_HS)
+	REGISTER_LONG_CONSTANT("SIO_DTR_DSR_HS", SIO_DTR_DSR_HS, CONST_PERSISTENT);
+#endif
+#if defined(SIO_XON_XOFF_HS)
+	REGISTER_LONG_CONSTANT("SIO_XON_XOFF_HS", SIO_XON_XOFF_HS, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_DTR_MASK)
+	REGISTER_LONG_CONSTANT("SIO_SET_DTR_MASK", SIO_SET_DTR_MASK, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_DTR_HIGH)
+	REGISTER_LONG_CONSTANT("SIO_SET_DTR_HIGH", SIO_SET_DTR_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_DTR_LOW)
+	REGISTER_LONG_CONSTANT("SIO_SET_DTR_LOW", SIO_SET_DTR_LOW, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_RTS_MASK)
+	REGISTER_LONG_CONSTANT("SIO_SET_RTS_MASK", SIO_SET_RTS_MASK, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_RTS_HIGH)
+	REGISTER_LONG_CONSTANT("SIO_SET_RTS_HIGH", SIO_SET_RTS_HIGH, CONST_PERSISTENT);
+#endif
+#if defined(SIO_SET_RTS_LOW)
+	REGISTER_LONG_CONSTANT("SIO_SET_RTS_LOW", SIO_SET_RTS_LOW, CONST_PERSISTENT);
+#endif
+#if defined(FT1284_CLK_IDLE_STATE)
+	REGISTER_LONG_CONSTANT("FT1284_CLK_IDLE_STATE", FT1284_CLK_IDLE_STATE, CONST_PERSISTENT);
+#endif
+#if defined(FT1284_DATA_LSB)
+	REGISTER_LONG_CONSTANT("FT1284_DATA_LSB", FT1284_DATA_LSB, CONST_PERSISTENT);
+#endif
+#if defined(FT1284_FLOW_CONTROL)
+	REGISTER_LONG_CONSTANT("FT1284_FLOW_CONTROL", FT1284_FLOW_CONTROL, CONST_PERSISTENT);
+#endif
+#if defined(POWER_SAVE_DISABLE_H)
+	REGISTER_LONG_CONSTANT("POWER_SAVE_DISABLE_H", POWER_SAVE_DISABLE_H, CONST_PERSISTENT);
+#endif
+#if defined(USE_SERIAL_NUM)
+	REGISTER_LONG_CONSTANT("USE_SERIAL_NUM", USE_SERIAL_NUM, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_TXD)
+	REGISTER_LONG_CONSTANT("INVERT_TXD", INVERT_TXD, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_RXD)
+	REGISTER_LONG_CONSTANT("INVERT_RXD", INVERT_RXD, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_RTS)
+	REGISTER_LONG_CONSTANT("INVERT_RTS", INVERT_RTS, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_CTS)
+	REGISTER_LONG_CONSTANT("INVERT_CTS", INVERT_CTS, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_DTR)
+	REGISTER_LONG_CONSTANT("INVERT_DTR", INVERT_DTR, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_DSR)
+	REGISTER_LONG_CONSTANT("INVERT_DSR", INVERT_DSR, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_DCD)
+	REGISTER_LONG_CONSTANT("INVERT_DCD", INVERT_DCD, CONST_PERSISTENT);
+#endif
+#if defined(INVERT_RI)
+	REGISTER_LONG_CONSTANT("INVERT_RI", INVERT_RI, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_UART)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_UART", CHANNEL_IS_UART, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_FIFO)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_FIFO", CHANNEL_IS_FIFO, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_OPTO)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_OPTO", CHANNEL_IS_OPTO, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_CPU)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_CPU", CHANNEL_IS_CPU, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_FT1284)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_FT1284", CHANNEL_IS_FT1284, CONST_PERSISTENT);
+#endif
+#if defined(CHANNEL_IS_RS485)
+	REGISTER_LONG_CONSTANT("CHANNEL_IS_RS485", CHANNEL_IS_RS485, CONST_PERSISTENT);
+#endif
+#if defined(DRIVE_4MA)
+	REGISTER_LONG_CONSTANT("DRIVE_4MA", DRIVE_4MA, CONST_PERSISTENT);
+#endif
+#if defined(DRIVE_8MA)
+	REGISTER_LONG_CONSTANT("DRIVE_8MA", DRIVE_8MA, CONST_PERSISTENT);
+#endif
+#if defined(DRIVE_12MA)
+	REGISTER_LONG_CONSTANT("DRIVE_12MA", DRIVE_12MA, CONST_PERSISTENT);
+#endif
+#if defined(DRIVE_16MA)
+	REGISTER_LONG_CONSTANT("DRIVE_16MA", DRIVE_16MA, CONST_PERSISTENT);
+#endif
+#if defined(SLOW_SLEW)
+	REGISTER_LONG_CONSTANT("SLOW_SLEW", SLOW_SLEW, CONST_PERSISTENT);
+#endif
+#if defined(IS_SCHMITT)
+	REGISTER_LONG_CONSTANT("IS_SCHMITT", IS_SCHMITT, CONST_PERSISTENT);
+#endif
+#if defined(DRIVER_VCP)
+	REGISTER_LONG_CONSTANT("DRIVER_VCP", DRIVER_VCP, CONST_PERSISTENT);
+#endif
+#if defined(DRIVER_VCPH)
+	REGISTER_LONG_CONSTANT("DRIVER_VCPH", DRIVER_VCPH, CONST_PERSISTENT);
+#endif
+#if defined(USE_USB_VERSION_BIT)
+	REGISTER_LONG_CONSTANT("USE_USB_VERSION_BIT", USE_USB_VERSION_BIT, CONST_PERSISTENT);
+#endif
+#if defined(SUSPEND_DBUS7_BIT)
+	REGISTER_LONG_CONSTANT("SUSPEND_DBUS7_BIT", SUSPEND_DBUS7_BIT, CONST_PERSISTENT);
+#endif
+#if defined(HIGH_CURRENT_DRIVE)
+	REGISTER_LONG_CONSTANT("HIGH_CURRENT_DRIVE", HIGH_CURRENT_DRIVE, CONST_PERSISTENT);
+#endif
+#if defined(HIGH_CURRENT_DRIVE_R)
+	REGISTER_LONG_CONSTANT("HIGH_CURRENT_DRIVE_R", HIGH_CURRENT_DRIVE_R, CONST_PERSISTENT);
+#endif
+}
+
+static zend_class_entry *register_class_Ftdi_FTDIContext(void)
+{
+	zend_class_entry ce, *class_entry;
+
+	INIT_NS_CLASS_ENTRY(ce, "Ftdi", "FTDIContext", class_Ftdi_FTDIContext_methods);
+	class_entry = zend_register_internal_class_with_flags(&ce, NULL, ZEND_ACC_FINAL|ZEND_ACC_NO_DYNAMIC_PROPERTIES|ZEND_ACC_NOT_SERIALIZABLE);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FTDIDevice(void)
+{
+	zend_class_entry ce, *class_entry;
+
+	INIT_NS_CLASS_ENTRY(ce, "Ftdi", "FTDIDevice", class_Ftdi_FTDIDevice_methods);
+	class_entry = zend_register_internal_class_with_flags(&ce, NULL, ZEND_ACC_FINAL|ZEND_ACC_NO_DYNAMIC_PROPERTIES|ZEND_ACC_NOT_SERIALIZABLE);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FTDITransferControl(void)
+{
+	zend_class_entry ce, *class_entry;
+
+	INIT_NS_CLASS_ENTRY(ce, "Ftdi", "FTDITransferControl", class_Ftdi_FTDITransferControl_methods);
+	class_entry = zend_register_internal_class_with_flags(&ce, NULL, ZEND_ACC_FINAL|ZEND_ACC_NO_DYNAMIC_PROPERTIES|ZEND_ACC_NOT_SERIALIZABLE);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FTDIVersionInfo(void)
+{
+	zend_class_entry ce, *class_entry;
+
+	INIT_NS_CLASS_ENTRY(ce, "Ftdi", "FTDIVersionInfo", class_Ftdi_FTDIVersionInfo_methods);
+	class_entry = zend_register_internal_class_with_flags(&ce, NULL, ZEND_ACC_FINAL);
+
+	zval property_major_default_value;
+	ZVAL_UNDEF(&property_major_default_value);
+	zend_string *property_major_name = zend_string_init("major", sizeof("major") - 1, 1);
+	zend_declare_typed_property(class_entry, property_major_name, &property_major_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_major_name);
+
+	zval property_minor_default_value;
+	ZVAL_UNDEF(&property_minor_default_value);
+	zend_string *property_minor_name = zend_string_init("minor", sizeof("minor") - 1, 1);
+	zend_declare_typed_property(class_entry, property_minor_name, &property_minor_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_minor_name);
+
+	zval property_micro_default_value;
+	ZVAL_UNDEF(&property_micro_default_value);
+	zend_string *property_micro_name = zend_string_init("micro", sizeof("micro") - 1, 1);
+	zend_declare_typed_property(class_entry, property_micro_name, &property_micro_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_micro_name);
+
+	zval property_versionStr_default_value;
+	ZVAL_UNDEF(&property_versionStr_default_value);
+	zend_string *property_versionStr_name = zend_string_init("versionStr", sizeof("versionStr") - 1, 1);
+	zend_declare_typed_property(class_entry, property_versionStr_name, &property_versionStr_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_STRING));
+	zend_string_release(property_versionStr_name);
+
+	zval property_snapshotStr_default_value;
+	ZVAL_UNDEF(&property_snapshotStr_default_value);
+	zend_string *property_snapshotStr_name = zend_string_init("snapshotStr", sizeof("snapshotStr") - 1, 1);
+	zend_declare_typed_property(class_entry, property_snapshotStr_name, &property_snapshotStr_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_STRING));
+	zend_string_release(property_snapshotStr_name);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FTDIEeprom(void)
+{
+	zend_class_entry ce, *class_entry;
+
+	INIT_NS_CLASS_ENTRY(ce, "Ftdi", "FTDIEeprom", class_Ftdi_FTDIEeprom_methods);
+	class_entry = zend_register_internal_class_with_flags(&ce, NULL, ZEND_ACC_FINAL);
+
+	zval property_vendorId_default_value;
+	ZVAL_UNDEF(&property_vendorId_default_value);
+	zend_string *property_vendorId_name = zend_string_init("vendorId", sizeof("vendorId") - 1, 1);
+	zend_declare_typed_property(class_entry, property_vendorId_name, &property_vendorId_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_vendorId_name);
+
+	zval property_productId_default_value;
+	ZVAL_UNDEF(&property_productId_default_value);
+	zend_string *property_productId_name = zend_string_init("productId", sizeof("productId") - 1, 1);
+	zend_declare_typed_property(class_entry, property_productId_name, &property_productId_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_productId_name);
+
+	zval property_selfPowered_default_value;
+	ZVAL_UNDEF(&property_selfPowered_default_value);
+	zend_string *property_selfPowered_name = zend_string_init("selfPowered", sizeof("selfPowered") - 1, 1);
+	zend_declare_typed_property(class_entry, property_selfPowered_name, &property_selfPowered_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_selfPowered_name);
+
+	zval property_remoteWakeup_default_value;
+	ZVAL_UNDEF(&property_remoteWakeup_default_value);
+	zend_string *property_remoteWakeup_name = zend_string_init("remoteWakeup", sizeof("remoteWakeup") - 1, 1);
+	zend_declare_typed_property(class_entry, property_remoteWakeup_name, &property_remoteWakeup_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_remoteWakeup_name);
+
+	zval property_isNotPnp_default_value;
+	ZVAL_UNDEF(&property_isNotPnp_default_value);
+	zend_string *property_isNotPnp_name = zend_string_init("isNotPnp", sizeof("isNotPnp") - 1, 1);
+	zend_declare_typed_property(class_entry, property_isNotPnp_name, &property_isNotPnp_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_isNotPnp_name);
+
+	zval property_suspendDbus7_default_value;
+	ZVAL_UNDEF(&property_suspendDbus7_default_value);
+	zend_string *property_suspendDbus7_name = zend_string_init("suspendDbus7", sizeof("suspendDbus7") - 1, 1);
+	zend_declare_typed_property(class_entry, property_suspendDbus7_name, &property_suspendDbus7_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_suspendDbus7_name);
+
+	zval property_inIsIsochronous_default_value;
+	ZVAL_UNDEF(&property_inIsIsochronous_default_value);
+	zend_string *property_inIsIsochronous_name = zend_string_init("inIsIsochronous", sizeof("inIsIsochronous") - 1, 1);
+	zend_declare_typed_property(class_entry, property_inIsIsochronous_name, &property_inIsIsochronous_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_inIsIsochronous_name);
+
+	zval property_outIsIsochronous_default_value;
+	ZVAL_UNDEF(&property_outIsIsochronous_default_value);
+	zend_string *property_outIsIsochronous_name = zend_string_init("outIsIsochronous", sizeof("outIsIsochronous") - 1, 1);
+	zend_declare_typed_property(class_entry, property_outIsIsochronous_name, &property_outIsIsochronous_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_outIsIsochronous_name);
+
+	zval property_suspendPullDowns_default_value;
+	ZVAL_UNDEF(&property_suspendPullDowns_default_value);
+	zend_string *property_suspendPullDowns_name = zend_string_init("suspendPullDowns", sizeof("suspendPullDowns") - 1, 1);
+	zend_declare_typed_property(class_entry, property_suspendPullDowns_name, &property_suspendPullDowns_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_suspendPullDowns_name);
+
+	zval property_useSerial_default_value;
+	ZVAL_UNDEF(&property_useSerial_default_value);
+	zend_string *property_useSerial_name = zend_string_init("useSerial", sizeof("useSerial") - 1, 1);
+	zend_declare_typed_property(class_entry, property_useSerial_name, &property_useSerial_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_useSerial_name);
+
+	zval property_usbVersion_default_value;
+	ZVAL_UNDEF(&property_usbVersion_default_value);
+	zend_string *property_usbVersion_name = zend_string_init("usbVersion", sizeof("usbVersion") - 1, 1);
+	zend_declare_typed_property(class_entry, property_usbVersion_name, &property_usbVersion_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_usbVersion_name);
+
+	zval property_useUsbVersion_default_value;
+	ZVAL_UNDEF(&property_useUsbVersion_default_value);
+	zend_string *property_useUsbVersion_name = zend_string_init("useUsbVersion", sizeof("useUsbVersion") - 1, 1);
+	zend_declare_typed_property(class_entry, property_useUsbVersion_name, &property_useUsbVersion_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_useUsbVersion_name);
+
+	zval property_maxPower_default_value;
+	ZVAL_UNDEF(&property_maxPower_default_value);
+	zend_string *property_maxPower_name = zend_string_init("maxPower", sizeof("maxPower") - 1, 1);
+	zend_declare_typed_property(class_entry, property_maxPower_name, &property_maxPower_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_maxPower_name);
+
+	zval property_channelAType_default_value;
+	ZVAL_UNDEF(&property_channelAType_default_value);
+	zend_string *property_channelAType_name = zend_string_init("channelAType", sizeof("channelAType") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelAType_name, &property_channelAType_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelAType_name);
+
+	zval property_channelBType_default_value;
+	ZVAL_UNDEF(&property_channelBType_default_value);
+	zend_string *property_channelBType_name = zend_string_init("channelBType", sizeof("channelBType") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelBType_name, &property_channelBType_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelBType_name);
+
+	zval property_channelADriver_default_value;
+	ZVAL_UNDEF(&property_channelADriver_default_value);
+	zend_string *property_channelADriver_name = zend_string_init("channelADriver", sizeof("channelADriver") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelADriver_name, &property_channelADriver_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelADriver_name);
+
+	zval property_channelBDriver_default_value;
+	ZVAL_UNDEF(&property_channelBDriver_default_value);
+	zend_string *property_channelBDriver_name = zend_string_init("channelBDriver", sizeof("channelBDriver") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelBDriver_name, &property_channelBDriver_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelBDriver_name);
+
+	zval property_cbusFunction0_default_value;
+	ZVAL_UNDEF(&property_cbusFunction0_default_value);
+	zend_string *property_cbusFunction0_name = zend_string_init("cbusFunction0", sizeof("cbusFunction0") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction0_name, &property_cbusFunction0_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction0_name);
+
+	zval property_cbusFunction1_default_value;
+	ZVAL_UNDEF(&property_cbusFunction1_default_value);
+	zend_string *property_cbusFunction1_name = zend_string_init("cbusFunction1", sizeof("cbusFunction1") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction1_name, &property_cbusFunction1_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction1_name);
+
+	zval property_cbusFunction2_default_value;
+	ZVAL_UNDEF(&property_cbusFunction2_default_value);
+	zend_string *property_cbusFunction2_name = zend_string_init("cbusFunction2", sizeof("cbusFunction2") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction2_name, &property_cbusFunction2_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction2_name);
+
+	zval property_cbusFunction3_default_value;
+	ZVAL_UNDEF(&property_cbusFunction3_default_value);
+	zend_string *property_cbusFunction3_name = zend_string_init("cbusFunction3", sizeof("cbusFunction3") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction3_name, &property_cbusFunction3_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction3_name);
+
+	zval property_cbusFunction4_default_value;
+	ZVAL_UNDEF(&property_cbusFunction4_default_value);
+	zend_string *property_cbusFunction4_name = zend_string_init("cbusFunction4", sizeof("cbusFunction4") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction4_name, &property_cbusFunction4_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction4_name);
+
+	zval property_cbusFunction5_default_value;
+	ZVAL_UNDEF(&property_cbusFunction5_default_value);
+	zend_string *property_cbusFunction5_name = zend_string_init("cbusFunction5", sizeof("cbusFunction5") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction5_name, &property_cbusFunction5_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction5_name);
+
+	zval property_cbusFunction6_default_value;
+	ZVAL_UNDEF(&property_cbusFunction6_default_value);
+	zend_string *property_cbusFunction6_name = zend_string_init("cbusFunction6", sizeof("cbusFunction6") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction6_name, &property_cbusFunction6_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction6_name);
+
+	zval property_cbusFunction7_default_value;
+	ZVAL_UNDEF(&property_cbusFunction7_default_value);
+	zend_string *property_cbusFunction7_name = zend_string_init("cbusFunction7", sizeof("cbusFunction7") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction7_name, &property_cbusFunction7_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction7_name);
+
+	zval property_cbusFunction8_default_value;
+	ZVAL_UNDEF(&property_cbusFunction8_default_value);
+	zend_string *property_cbusFunction8_name = zend_string_init("cbusFunction8", sizeof("cbusFunction8") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction8_name, &property_cbusFunction8_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction8_name);
+
+	zval property_cbusFunction9_default_value;
+	ZVAL_UNDEF(&property_cbusFunction9_default_value);
+	zend_string *property_cbusFunction9_name = zend_string_init("cbusFunction9", sizeof("cbusFunction9") - 1, 1);
+	zend_declare_typed_property(class_entry, property_cbusFunction9_name, &property_cbusFunction9_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_cbusFunction9_name);
+
+	zval property_highCurrent_default_value;
+	ZVAL_UNDEF(&property_highCurrent_default_value);
+	zend_string *property_highCurrent_name = zend_string_init("highCurrent", sizeof("highCurrent") - 1, 1);
+	zend_declare_typed_property(class_entry, property_highCurrent_name, &property_highCurrent_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_highCurrent_name);
+
+	zval property_highCurrentA_default_value;
+	ZVAL_UNDEF(&property_highCurrentA_default_value);
+	zend_string *property_highCurrentA_name = zend_string_init("highCurrentA", sizeof("highCurrentA") - 1, 1);
+	zend_declare_typed_property(class_entry, property_highCurrentA_name, &property_highCurrentA_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_highCurrentA_name);
+
+	zval property_highCurrentB_default_value;
+	ZVAL_UNDEF(&property_highCurrentB_default_value);
+	zend_string *property_highCurrentB_name = zend_string_init("highCurrentB", sizeof("highCurrentB") - 1, 1);
+	zend_declare_typed_property(class_entry, property_highCurrentB_name, &property_highCurrentB_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_highCurrentB_name);
+
+	zval property_invert_default_value;
+	ZVAL_UNDEF(&property_invert_default_value);
+	zend_string *property_invert_name = zend_string_init("invert", sizeof("invert") - 1, 1);
+	zend_declare_typed_property(class_entry, property_invert_name, &property_invert_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_invert_name);
+
+	zval property_group0Drive_default_value;
+	ZVAL_UNDEF(&property_group0Drive_default_value);
+	zend_string *property_group0Drive_name = zend_string_init("group0Drive", sizeof("group0Drive") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group0Drive_name, &property_group0Drive_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group0Drive_name);
+
+	zval property_group0Schmitt_default_value;
+	ZVAL_UNDEF(&property_group0Schmitt_default_value);
+	zend_string *property_group0Schmitt_name = zend_string_init("group0Schmitt", sizeof("group0Schmitt") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group0Schmitt_name, &property_group0Schmitt_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group0Schmitt_name);
+
+	zval property_group0Slew_default_value;
+	ZVAL_UNDEF(&property_group0Slew_default_value);
+	zend_string *property_group0Slew_name = zend_string_init("group0Slew", sizeof("group0Slew") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group0Slew_name, &property_group0Slew_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group0Slew_name);
+
+	zval property_group1Drive_default_value;
+	ZVAL_UNDEF(&property_group1Drive_default_value);
+	zend_string *property_group1Drive_name = zend_string_init("group1Drive", sizeof("group1Drive") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group1Drive_name, &property_group1Drive_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group1Drive_name);
+
+	zval property_group1Schmitt_default_value;
+	ZVAL_UNDEF(&property_group1Schmitt_default_value);
+	zend_string *property_group1Schmitt_name = zend_string_init("group1Schmitt", sizeof("group1Schmitt") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group1Schmitt_name, &property_group1Schmitt_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group1Schmitt_name);
+
+	zval property_group1Slew_default_value;
+	ZVAL_UNDEF(&property_group1Slew_default_value);
+	zend_string *property_group1Slew_name = zend_string_init("group1Slew", sizeof("group1Slew") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group1Slew_name, &property_group1Slew_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group1Slew_name);
+
+	zval property_group2Drive_default_value;
+	ZVAL_UNDEF(&property_group2Drive_default_value);
+	zend_string *property_group2Drive_name = zend_string_init("group2Drive", sizeof("group2Drive") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group2Drive_name, &property_group2Drive_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group2Drive_name);
+
+	zval property_group2Schmitt_default_value;
+	ZVAL_UNDEF(&property_group2Schmitt_default_value);
+	zend_string *property_group2Schmitt_name = zend_string_init("group2Schmitt", sizeof("group2Schmitt") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group2Schmitt_name, &property_group2Schmitt_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group2Schmitt_name);
+
+	zval property_group2Slew_default_value;
+	ZVAL_UNDEF(&property_group2Slew_default_value);
+	zend_string *property_group2Slew_name = zend_string_init("group2Slew", sizeof("group2Slew") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group2Slew_name, &property_group2Slew_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group2Slew_name);
+
+	zval property_group3Drive_default_value;
+	ZVAL_UNDEF(&property_group3Drive_default_value);
+	zend_string *property_group3Drive_name = zend_string_init("group3Drive", sizeof("group3Drive") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group3Drive_name, &property_group3Drive_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group3Drive_name);
+
+	zval property_group3Schmitt_default_value;
+	ZVAL_UNDEF(&property_group3Schmitt_default_value);
+	zend_string *property_group3Schmitt_name = zend_string_init("group3Schmitt", sizeof("group3Schmitt") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group3Schmitt_name, &property_group3Schmitt_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group3Schmitt_name);
+
+	zval property_group3Slew_default_value;
+	ZVAL_UNDEF(&property_group3Slew_default_value);
+	zend_string *property_group3Slew_name = zend_string_init("group3Slew", sizeof("group3Slew") - 1, 1);
+	zend_declare_typed_property(class_entry, property_group3Slew_name, &property_group3Slew_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_group3Slew_name);
+
+	zval property_chipSize_default_value;
+	ZVAL_UNDEF(&property_chipSize_default_value);
+	zend_string *property_chipSize_name = zend_string_init("chipSize", sizeof("chipSize") - 1, 1);
+	zend_declare_typed_property(class_entry, property_chipSize_name, &property_chipSize_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_chipSize_name);
+
+	zval property_chipType_default_value;
+	ZVAL_UNDEF(&property_chipType_default_value);
+	zend_string *property_chipType_name = zend_string_init("chipType", sizeof("chipType") - 1, 1);
+	zend_declare_typed_property(class_entry, property_chipType_name, &property_chipType_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_chipType_name);
+
+	zval property_powerSave_default_value;
+	ZVAL_UNDEF(&property_powerSave_default_value);
+	zend_string *property_powerSave_name = zend_string_init("powerSave", sizeof("powerSave") - 1, 1);
+	zend_declare_typed_property(class_entry, property_powerSave_name, &property_powerSave_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_powerSave_name);
+
+	zval property_clockPolarity_default_value;
+	ZVAL_UNDEF(&property_clockPolarity_default_value);
+	zend_string *property_clockPolarity_name = zend_string_init("clockPolarity", sizeof("clockPolarity") - 1, 1);
+	zend_declare_typed_property(class_entry, property_clockPolarity_name, &property_clockPolarity_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_clockPolarity_name);
+
+	zval property_dataOrder_default_value;
+	ZVAL_UNDEF(&property_dataOrder_default_value);
+	zend_string *property_dataOrder_name = zend_string_init("dataOrder", sizeof("dataOrder") - 1, 1);
+	zend_declare_typed_property(class_entry, property_dataOrder_name, &property_dataOrder_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_dataOrder_name);
+
+	zval property_flowControl_default_value;
+	ZVAL_UNDEF(&property_flowControl_default_value);
+	zend_string *property_flowControl_name = zend_string_init("flowControl", sizeof("flowControl") - 1, 1);
+	zend_declare_typed_property(class_entry, property_flowControl_name, &property_flowControl_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_flowControl_name);
+
+	zval property_channelCDriver_default_value;
+	ZVAL_UNDEF(&property_channelCDriver_default_value);
+	zend_string *property_channelCDriver_name = zend_string_init("channelCDriver", sizeof("channelCDriver") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelCDriver_name, &property_channelCDriver_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelCDriver_name);
+
+	zval property_channelDDriver_default_value;
+	ZVAL_UNDEF(&property_channelDDriver_default_value);
+	zend_string *property_channelDDriver_name = zend_string_init("channelDDriver", sizeof("channelDDriver") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelDDriver_name, &property_channelDDriver_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelDDriver_name);
+
+	zval property_channelARs485_default_value;
+	ZVAL_UNDEF(&property_channelARs485_default_value);
+	zend_string *property_channelARs485_name = zend_string_init("channelARs485", sizeof("channelARs485") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelARs485_name, &property_channelARs485_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelARs485_name);
+
+	zval property_channelBRs485_default_value;
+	ZVAL_UNDEF(&property_channelBRs485_default_value);
+	zend_string *property_channelBRs485_name = zend_string_init("channelBRs485", sizeof("channelBRs485") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelBRs485_name, &property_channelBRs485_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelBRs485_name);
+
+	zval property_channelCRs485_default_value;
+	ZVAL_UNDEF(&property_channelCRs485_default_value);
+	zend_string *property_channelCRs485_name = zend_string_init("channelCRs485", sizeof("channelCRs485") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelCRs485_name, &property_channelCRs485_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelCRs485_name);
+
+	zval property_channelDRs485_default_value;
+	ZVAL_UNDEF(&property_channelDRs485_default_value);
+	zend_string *property_channelDRs485_name = zend_string_init("channelDRs485", sizeof("channelDRs485") - 1, 1);
+	zend_declare_typed_property(class_entry, property_channelDRs485_name, &property_channelDRs485_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_channelDRs485_name);
+
+	zval property_releaseNumber_default_value;
+	ZVAL_UNDEF(&property_releaseNumber_default_value);
+	zend_string *property_releaseNumber_name = zend_string_init("releaseNumber", sizeof("releaseNumber") - 1, 1);
+	zend_declare_typed_property(class_entry, property_releaseNumber_name, &property_releaseNumber_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_releaseNumber_name);
+
+	zval property_externalOscillator_default_value;
+	ZVAL_UNDEF(&property_externalOscillator_default_value);
+	zend_string *property_externalOscillator_name = zend_string_init("externalOscillator", sizeof("externalOscillator") - 1, 1);
+	zend_declare_typed_property(class_entry, property_externalOscillator_name, &property_externalOscillator_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_externalOscillator_name);
+
+	zval property_userDataAddr_default_value;
+	ZVAL_UNDEF(&property_userDataAddr_default_value);
+	zend_string *property_userDataAddr_name = zend_string_init("userDataAddr", sizeof("userDataAddr") - 1, 1);
+	zend_declare_typed_property(class_entry, property_userDataAddr_name, &property_userDataAddr_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_LONG));
+	zend_string_release(property_userDataAddr_name);
+
+	zval property_manufacturer_default_value;
+	ZVAL_UNDEF(&property_manufacturer_default_value);
+	zend_string *property_manufacturer_name = zend_string_init("manufacturer", sizeof("manufacturer") - 1, 1);
+	zend_declare_typed_property(class_entry, property_manufacturer_name, &property_manufacturer_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_STRING));
+	zend_string_release(property_manufacturer_name);
+
+	zval property_product_default_value;
+	ZVAL_UNDEF(&property_product_default_value);
+	zend_string *property_product_name = zend_string_init("product", sizeof("product") - 1, 1);
+	zend_declare_typed_property(class_entry, property_product_name, &property_product_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_STRING));
+	zend_string_release(property_product_name);
+
+	zval property_serial_default_value;
+	ZVAL_UNDEF(&property_serial_default_value);
+	zend_string *property_serial_name = zend_string_init("serial", sizeof("serial") - 1, 1);
+	zend_declare_typed_property(class_entry, property_serial_name, &property_serial_default_value, ZEND_ACC_PUBLIC|ZEND_ACC_READONLY, NULL, (zend_type) ZEND_TYPE_INIT_MASK(MAY_BE_STRING));
+	zend_string_release(property_serial_name);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FtdiVendorId(void)
+{
+	zend_class_entry *class_entry = zend_register_internal_enum("Ftdi\\FtdiVendorId", IS_LONG, NULL);
+
+	zval enum_case_FTDI_value;
+	ZVAL_LONG(&enum_case_FTDI_value, 0x403);
+	zend_enum_add_case_cstr(class_entry, "FTDI", &enum_case_FTDI_value);
+
+	return class_entry;
+}
+
+static zend_class_entry *register_class_Ftdi_FtdiProductId(void)
+{
+	zend_class_entry *class_entry = zend_register_internal_enum("Ftdi\\FtdiProductId", IS_LONG, NULL);
+
+	zval enum_case_FT232R_value;
+	ZVAL_LONG(&enum_case_FT232R_value, 0x6001);
+	zend_enum_add_case_cstr(class_entry, "FT232R", &enum_case_FT232R_value);
+
+	zval enum_case_FT2232H_value;
+	ZVAL_LONG(&enum_case_FT2232H_value, 0x6010);
+	zend_enum_add_case_cstr(class_entry, "FT2232H", &enum_case_FT2232H_value);
+
+	zval enum_case_FT4232H_value;
+	ZVAL_LONG(&enum_case_FT4232H_value, 0x6011);
+	zend_enum_add_case_cstr(class_entry, "FT4232H", &enum_case_FT4232H_value);
+
+	zval enum_case_FT232H_value;
+	ZVAL_LONG(&enum_case_FT232H_value, 0x6014);
+	zend_enum_add_case_cstr(class_entry, "FT232H", &enum_case_FT232H_value);
+
+	zval enum_case_FT230X_value;
+	ZVAL_LONG(&enum_case_FT230X_value, 0x6015);
+	zend_enum_add_case_cstr(class_entry, "FT230X", &enum_case_FT230X_value);
+
+	zval enum_case_FT4232HP_value;
+	ZVAL_LONG(&enum_case_FT4232HP_value, 0x6043);
+	zend_enum_add_case_cstr(class_entry, "FT4232HP", &enum_case_FT4232HP_value);
+
+	zval enum_case_FT4232HA_value;
+	ZVAL_LONG(&enum_case_FT4232HA_value, 0x6048);
+	zend_enum_add_case_cstr(class_entry, "FT4232HA", &enum_case_FT4232HA_value);
+
+	return class_entry;
+}
