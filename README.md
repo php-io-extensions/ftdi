@@ -22,6 +22,7 @@ ext-ftdi                        libftdi1 calls, 1:1                    ← this 
   - macOS: `brew install libftdi pkg-config`
   - Debian, Raspberry Pi OS, Ubuntu: `sudo apt install libftdi1-dev pkg-config`
 - Read-write access to the USB device. On Linux, run as root or add a udev rule such as `SUBSYSTEM=="usb", ATTR{idVendor}=="0403", MODE="0660", GROUP="plugdev"` and join that group. libftdi detaches the kernel's `ftdi_sio` serial driver from the interface it opens.
+- `venusian build` reads the system packages from `extra.venusian.system` in composer.json: apt packages to build with and the run-time ones a `.deb` depends on or recommends, and the Homebrew ones.
 
 ## Installation
 

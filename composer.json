@@ -24,6 +24,22 @@
     "extra": {
         "branch-alias": {
             "dev-main": "0.10.x-dev"
+        },
+        "venusian": {
+            "system": {
+                "apt": {
+                    "build": [
+                        "libftdi1-dev",
+                        "libusb-1.0-0-dev"
+                    ]
+                },
+                "brew": {
+                    "build": [
+                        "libftdi",
+                        "libusb"
+                    ]
+                }
+            }
         }
     },
     "php-ext": {

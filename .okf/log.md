@@ -1,5 +1,9 @@
 # Log
 
+## 2026-10-09
+
+* `extra.venusian.system` in composer.json: the apt packages `venusian build` installs to compile the extension, the run-time packages a `.deb` carrying it depends on or recommends beyond what `dpkg-shlibdeps` sees, and the Homebrew packages for a dev install.
+
 ## 2026-10-04
 
 * **Creation**: Bundle created for ext-ftdi 0.10.0, the plain-C rewrite: [module](/architecture/module.md), [libftdi 1.5 guards](/architecture/libftdi-1-5-guards.md), [objects](/api/objects.md), [functions](/api/functions.md), [async](/api/async.md), [EEPROM](/api/eeprom.md), [constants](/api/constants.md), [build](/runbooks/build.md), [upgrade from 0.9](/reference/upgrade-from-0-9.md).
