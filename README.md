@@ -1,5 +1,6 @@
 # ext-ftdi
 
+[![CI](https://img.shields.io/github/actions/workflow/status/php-io-extensions/ftdi/ci.yml?style=flat-square&label=CI)](https://github.com/php-io-extensions/ftdi/actions/workflows/ci.yml)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/php-io-extensions/ftdi.svg)](https://packagist.org/packages/php-io-extensions/ftdi)
 [![License](https://img.shields.io/packagist/l/php-io-extensions/ftdi.svg)](LICENSE)
 
