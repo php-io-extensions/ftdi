@@ -1,5 +1,10 @@
 # Log
 
+## 2026-10-12
+
+* **Version**: 0.10.5 in `composer.json` and `PHP_FTDI_VERSION`. No API change. Steps past 0.10.1 through 0.10.4 to line up with the sibling extensions.
+* **README**: rewritten on the php-io-extensions template (header badges, two-part basic usage, requirements table, PIE / install script / phpize install paths, API, OKF section, suite run). Suite count (12 passed, 85 assertions) run against a scratch build on Homebrew PHP 8.4 NTS, libftdi1 1.5.
+
 ## 2026-10-09
 
 * `extra.venusian.system` in composer.json: the apt packages `venusian build` installs to compile the extension, the run-time packages a `.deb` carrying it depends on or recommends beyond what `dpkg-shlibdeps` sees, and the Homebrew packages for a dev install.
