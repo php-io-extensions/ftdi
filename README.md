@@ -120,8 +120,6 @@ xcode-select --install
 brew install php@8.4 libftdi libusb pkgconf
 ```
 
-`venusian build` reads the same packages from `extra.venusian.system` in `composer.json`.
-
 ## Installation
 
 ### With PHP PIE (recommended)
@@ -166,7 +164,7 @@ $ php --ri ftdi
 ftdi
 
 ftdi support => enabled
-Version => 0.10.x
+Version => 0.11.x
 libftdi1 => 1.5
 ```
 

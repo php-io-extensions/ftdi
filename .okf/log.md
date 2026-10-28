@@ -1,8 +1,12 @@
 # Log
 
+## 2026-10-28
+
+* **Version**: 0.11.0 in `composer.json` and `PHP_FTDI_VERSION` (`php_ftdi.h`), straight from 0.10.0; `branch-alias` `dev-main` is `0.11.x-dev`. Promoted with the Venusian 0.11 ecosystem. No API or behaviour change. 12 passed on Homebrew PHP 8.4 NTS and ZTS and the Pi on 8.4 ZTS.
+* **Open — x86_64 box**: not built on the x86_64 Ubuntu-family 8.4 NTS box; it lacks `pkg-config libftdi1-dev`.
+
 ## 2026-10-12
 
-* **Version**: 0.10.5 in `composer.json` and `PHP_FTDI_VERSION`. No API change. Steps past 0.10.1 through 0.10.4 to line up with the sibling extensions.
 * **README**: rewritten on the php-io-extensions template (header badges, two-part basic usage, requirements table, PIE / install script / phpize install paths, API, OKF section, suite run). Suite count (12 passed, 85 assertions) run against a scratch build on Homebrew PHP 8.4 NTS, libftdi1 1.5.
 
 ## 2026-10-09
